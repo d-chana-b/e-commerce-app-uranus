@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,8 @@
     <style>
         /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
         .header{
-          width: 100%;
-          height: 100px;
+          width: 100;
+          height: 50px;
           background-color: black;
           color: white;
           }
@@ -84,14 +84,14 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">
-            <img th:src="@{/image/logo.png}" src="/image/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
-            Dripin Kicks</span>
+            <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
+            Company Name</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" th:href="@{/admin}">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
               <a class="nav-link" href="#">Contact</a>
               <a class="nav-link" href="#">About</a>
             </div>
@@ -105,28 +105,67 @@
     <!-- START HERE!!!!!-->
     
     <div class="header">
-        <center><img src="/image/admin.jpg" style="height: 80px; border-radius: 10px;" alt="adminicon" id="image">
+        <center><img src="image/admin.jpg" style="height: 80px; border-radius: 10px;" alt="adminicon" id="image">
         <br>Welcome to Admin Page!</center>
     </div>
-    <div class="main-content">
+     <!--   <div class="main-content">
         <div class="sidebar">
             <ul class="ulol">
                 <li class="lilo">Check Profile</li>
                 <li class="lilo">Manage Users</li>
+                <li class="lilo">Archives</li>
+                <li class="lilo">Settings</li>
                 <li class="lilo">Logout</li>
             </ul>
-        </div>
+        </div> -->
         <div class="content">
             <h3>Greetings Admin!</h3>
-            <br>                
-            <center><a th:href="@{}"><button type="input" method="get">Manage Products</button></a></center>
-            <br>                
-            <center><a href="productlist.html"><button type="input" method="get">Manage Events</button></a></center>
+            <br>      
             <br>
-            <center><a href="coupon.html"><button type="input" method="get">Manage Coupon</button></a></center>
+            <div>
+             <button type="button" class="btn btn-secondary btn-lg btn-block">Manage Events</button>    
+            	<button type="button" class="btn btn-secondary btn-lg btn-block">Manage Coupons</button> 
+          </div>
+ <br>
+   <div class="container">
+        <div class="row">
+            <p>
+                <a class="btn btn-primary" th:href="@{/admin/product/add}" role="button" >Add Product</a>
+            </p>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                      <th scope="col">Product Code</th>
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Product Image</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each = "product: ${product}">
+					<td th:text = "${product.ProductCode}"></td>
+					<td th:text = "${product.ProductName}"></td>
+					<td th:text = "${product.CategoryID}"></td>
+					<td th:text = "${product.Quantity}"></td>
+					<td th:text = "${product.Price}"></td>
+					<td th:text = "${product.ProductImage}"></td>
+					<td>
+						<a th:href = "@{/product/edit/{id}(id=${product.id})}"
+						 class = "btn btn-primary">Update</a>
+						
+						<a th:href = "@{/product/{id}(id=${product.id})}"
+						 class = "btn btn-danger">Delete</a>
+						 
+					</td>
+				</tr>
+                  </tbody>
+              </table>
         </div>
-    </div>  
-
+        </div>
+    </div>
     <!-- END HERE!!!!!!-->
     <br><br><br>
     <!-- FOOTER-->
@@ -143,16 +182,14 @@
             </div>
         </div>
     </div>
-  
+
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
-      <a href="#"> uranus.com</a>
+    <a href="#"> uranus.com</a>
     </div>
     <!-- Copyright -->
     </footer>
     <!-- Footer -->
-
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -166,5 +203,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
+
   </body>
 </html>
