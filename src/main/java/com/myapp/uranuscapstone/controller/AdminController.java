@@ -12,12 +12,13 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/product")
-	public String getProduct() {
+	public String adminProduct() {
 		return "/Admin/productlist";
 	}
-	@GetMapping("/admins")
-	public String adminHomes() {
-		return "/Admin/adminHome";
+	@GetMapping("/admin/product/add")
+	public String getProduct() {
+		return "/Admin/addproduct";
 	}
+	
 
 }
