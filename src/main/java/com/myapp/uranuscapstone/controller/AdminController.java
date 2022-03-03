@@ -51,39 +51,34 @@ public class AdminController {
 	
 	@GetMapping("/admin")
 	public String listProduct(Model model) {
-		model.addAttribute("product", productService.getAllProduct());
+		model.addAttribute("products", productService.getAllProduct());
 		return "/Admin/adminHome";
 	}
 	
 
 	@GetMapping("/admin/product/add")
-	public String createProductForm(Model model) {
-		
+	public String createProductForm(Model model) {		
 		// create student object to hold student form data
-
 		model.addAttribute("product", new Product());
-		
 		return "/Admin/addproduct";  
 		}
 		
 		
-	
-	
-	@PostMapping("/admin/product/add")
-	public String saveProduct(@ModelAttribute("product") Product product) {
-		productService.saveProduct(product);
-		return "redirect:/adminHome";
-	}
-	
-	@GetMapping("/product/edit/{id}")
+	 /*@GetMapping("/product/edit/{id}")
 	public String editProductForm(@PathVariable Long id, Model model) {
 		model.addAttribute("product", productService.getProductById(id));
 		return "/Admin/addproduct";
 	}
 
 	
-	@PostMapping("/admin/products/add")
-	public String productAddPost(@ModelAttribute("product") Product product,
+ /*	@PostMapping("/admin/product/add")
+	public String saveProduct(@ModelAttribute("product") Product product) {
+		productService.saveProduct(product);
+		return "redirect:/admin";
+	} */
+	
+	@PostMapping("/admin/product/add")
+	public String saveProduct(@ModelAttribute("product") Product product,
 			@RequestParam("productImage") MultipartFile file,
 	@RequestParam("imageName")String imgName) throws IOException{
 
@@ -96,41 +91,40 @@ public class AdminController {
 	}
 	else{
 		imageUUId=imgName;
-		}
+		} 
 	product.setProductImageName(imageUUId);
 	productService.saveProduct(product);
 	return "redirect:/admin";
 	}
 	
+
 	
 	
+	@PostMapping("admin/update/{id}")
+	public String updateProduct(@PathVariable Long id,
+			@ModelAttribute("product") Product product,
+			Model model) {
 	
-	
-//	@PostMapping("/product/{id}")
-//	public String updateProduct(@PathVariable Long id,
-//			@ModelAttribute("product") Product product,
-//			Model model) {
-//	
-//		// get Product from database by id
-//				Product existingProduct = productService.getProductById(id);
-//				existingProduct.setId(id);
-//				existingProduct.setProductName(product.getProductName());
-//				existingProduct.setCategoryName(product.getCategoryName());
-//				existingProduct.setPrice(product.getPrice());
-//				existingProduct.setProductImageName(product.getProductImageName());
-//
-//			// save updated student object
-//				productService.updateProduct(existingProduct);
-//				return "redirect:/adminHome";		
-//			}
-//			
-//			// handler method to handle delete student request
-//			
-//			@GetMapping("/product/{id}")
-//			public String deleteProduct(@PathVariable Long id) {
-//				productService.deleteProductById(id);
-//				return "redirect:/adminHome";
-//			}
+	// get Product from database by id
+			Product existingProduct = productService.getProductById(id);
+			existingProduct.setId(id);
+			existingProduct.setProductName(product.getProductName());
+			existingProduct.setCategoryName(product.getCategoryName());				
+			existingProduct.setPrice(product.getPrice());
+			existingProduct.setProductImageName(product.getProductImageName());
+
+			// save updated student object
+				productService.updateProduct(existingProduct);
+				return "/Admin/adminHome";		
+		}
+			
+			// handler method to handle delete student request
+		
+			@GetMapping("admin/delete/{id}")
+		public String deleteProduct(@PathVariable Long id) {
+				productService.deleteProductById(id);
+				return "redirect:/admin";
+		}
 	
 	
 	
