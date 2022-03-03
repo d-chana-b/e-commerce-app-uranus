@@ -30,7 +30,7 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	
-	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/product-photos";
+	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/product-photos";
 	/*
 	@GetMapping("/admin")
 	public String adminHome() {
