@@ -1,4 +1,4 @@
-package com.maypp.uranuscapstone.model;
+package com.myapp.uranuscapstone.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Category {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="category_id")
@@ -36,10 +35,4 @@ public class Category {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
-	
-	
-	
-	
 }
