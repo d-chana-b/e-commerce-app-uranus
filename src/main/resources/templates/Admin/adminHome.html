@@ -135,10 +135,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                      <th scope="col">Product Code</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Quantity</th>
+                    <th scope="col">Product Name</th>
+                      <th scope="col">Category Name</th>
                       <th scope="col">Price</th>
                       <th scope="col">Product Image</th>
                       <th scope="col">Actions</th>
@@ -146,12 +144,10 @@
                   </thead>
                   <tbody>
                     <tr th:each = "product: ${product}">
-					<td th:text = "${product.ProductCode}"></td>
-					<td th:text = "${product.ProductName}"></td>
-					<td th:text = "${product.CategoryID}"></td>
-					<td th:text = "${product.Quantity}"></td>
-					<td th:text = "${product.Price}"></td>
-					<td th:text = "${product.ProductImage}"></td>
+					<td th:text = "${product.productName}"></td>
+					<td th:text = "${product.categoryName}"></td>
+					<td th:text = "${product.price}"></td>
+					<td th:text = "${product.productImageName}"></td>
 					<td>
 						<a th:href = "@{/product/edit/{id}(id=${product.id})}"
 						 class = "btn btn-primary">Update</a>

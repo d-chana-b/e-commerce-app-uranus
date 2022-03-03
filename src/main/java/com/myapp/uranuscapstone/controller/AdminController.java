@@ -1,5 +1,10 @@
 package com.myapp.uranuscapstone.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.myapp.uranuscapstone.dto.ProductDTO;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -21,6 +29,8 @@ public class AdminController {
 	
 	@Autowired
 	ProductService productService;
+	
+	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/product-photos";
 	
 	
 	@GetMapping("/admin")
@@ -42,7 +52,7 @@ public class AdminController {
 	
 	@GetMapping("/admin/product")
 	public String listProduct(Model model) {
-		model.addAttribute("students", productService.getAllProduct());
+		model.addAttribute("product", productService.getAllProduct());
 		return "/Admin/adminHome";
 	}
 	
@@ -53,8 +63,8 @@ public class AdminController {
 		// create student object to hold student form data
 
 		model.addAttribute("product", new Product());
-		return "/Admin/addproduct";  
 		
+		return "/Admin/addproduct";  
 		}
 		
 		
@@ -68,36 +78,60 @@ public class AdminController {
 	
 	@GetMapping("/product/edit/{id}")
 	public String editProductForm(@PathVariable Long id, Model model) {
-		model.addAttribute("student", productService.getProductById(id));
+		model.addAttribute("product", productService.getProductById(id));
 		return "/Admin/addproduct";
 	}
 
-	@PostMapping("/product/{id}")
-	public String updateProduct(@PathVariable Long id,
-			@ModelAttribute("product") Product product,
-			Model model) {
 	
-		// get Product from database by id
-				Product existingProduct = productService.getProductById(id);
-				existingProduct.setId(id);
-				existingProduct.setProductName(product.getProductName());
-				//existingProduct.setCategory(product.getCategory());
-				existingProduct.setQuantity(product.getQuantity());
-				existingProduct.setPrice(product.getPrice());
-				existingProduct.setProductImage(product.getProductImage());
+	@PostMapping("/admin/products/add")
+	public String productAddPost(@ModelAttribute("product") Product product,
+			@RequestParam("productImage") MultipartFile file,
+	@RequestParam("imageName")String imgName) throws IOException{
 
-			// save updated student object
-				productService.updateProduct(existingProduct);
-				return "redirect:/adminHome";		
-			}
-			
-			// handler method to handle delete student request
-			
-			@GetMapping("/product/{id}")
-			public String deleteProduct(@PathVariable Long id) {
-				productService.deleteProductById(id);
-				return "redirect:/adminHome";
-			}
+	
+	String imageUUId;
+	if(!file.isEmpty()){
+	  imageUUId=file.getOriginalFilename();
+	  Path fileNameAndPath=Paths.get(uploadDirectory,imageUUId);
+	  Files.write(fileNameAndPath,file.getBytes()); 
+	}
+	else{
+		imageUUId=imgName;
+		}
+	product.setProductImageName(imageUUId);
+	productService.saveProduct(product);
+	return "redirect:/admin";
+	}
+	
+	
+	
+	
+	
+//	@PostMapping("/product/{id}")
+//	public String updateProduct(@PathVariable Long id,
+//			@ModelAttribute("product") Product product,
+//			Model model) {
+//	
+//		// get Product from database by id
+//				Product existingProduct = productService.getProductById(id);
+//				existingProduct.setId(id);
+//				existingProduct.setProductName(product.getProductName());
+//				existingProduct.setCategoryName(product.getCategoryName());
+//				existingProduct.setPrice(product.getPrice());
+//				existingProduct.setProductImageName(product.getProductImageName());
+//
+//			// save updated student object
+//				productService.updateProduct(existingProduct);
+//				return "redirect:/adminHome";		
+//			}
+//			
+//			// handler method to handle delete student request
+//			
+//			@GetMapping("/product/{id}")
+//			public String deleteProduct(@PathVariable Long id) {
+//				productService.deleteProductById(id);
+//				return "redirect:/adminHome";
+//			}
 	
 	
 	
