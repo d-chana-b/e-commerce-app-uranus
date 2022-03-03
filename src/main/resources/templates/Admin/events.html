@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -26,12 +26,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="adminHome.html"><i class='fas fa-home'></i>Admin Homepage</a>
+            <a class="nav-link" th:href="adminHome.html"><i class='fas fa-home'></i>Admin Homepage</a>
             <a class="nav-link" href="#"><i class='fas fa-sign-out-alt'></i>Logout</a>
             </div>
         </div>
         <style>
-        
+    
         </style>
     </nav>
     <br><br><br>
@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row">
             <p>
-                <a class="btn btn-primary" href="addcategories.html" role="button" >Add Events</a>
+                <a class="btn btn-primary" th:href="addcategories.html" role="button" >Add Events</a>
             </p>
             <table class="table table-hover">
                 <thead>
@@ -49,7 +49,6 @@
                       <th scope="col">Start Date</th>
                       <th scope="col">End Date</th>
                       <th scope="col">Discount</th>
-                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -59,8 +58,9 @@
                       <td><input type="date" id="strdate"></td>
                       <td><input type="date" id="enddate"></td>
                       <td><div class="select">
-                          <select name="discount" id="dsc1">
-                            <option value=""> Select a Discount </option>
+                          <select class="discount" id="dsc1">
+                            <div class="dropdown-content">
+                            <option value=""></option>
                             <option value="10%">10%</option>
                             <option value="30%">30%</option>
                             <option vaalue="50%">50%</option>
@@ -75,7 +75,7 @@
                       <td><input type="date" id="enddate"></td>
                       <td><div class="select">
                         <select name="discount" id="dsc2">
-                          <option value=""> Select a Discount </option>
+                          <option value=""></option>
                           <option value="10%">10%</option>
                           <option value="30%">30%</option>
                           <option vaalue="50%">50%</option>
@@ -90,7 +90,7 @@
                       <td><input type="date" id="enddate"></td>
                       <td><div class="select">
                         <select name="discount" id="dsc3">
-                          <option value=""> Select a Discount </option>
+                          <option value=""></option>
                           <option value="10%">10%</option>
                           <option value="30%">30%</option>
                           <option vaalue="50%">50%</option>
