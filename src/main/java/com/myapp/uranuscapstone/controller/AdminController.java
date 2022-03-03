@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.myapp.uranuscapstone.dto.ProductDTO;
+
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -31,8 +31,7 @@ public class AdminController {
 	ProductService productService;
 	
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/product-photos";
-	
-	
+	/*
 	@GetMapping("/admin")
 	public String adminHome() {
 		return "/Admin/adminHome";
@@ -46,11 +45,11 @@ public class AdminController {
 	
 	/* @GetMapping("/admin/product/add")
 	public String getProduct() {
-		return "/Admin/addproduct";
+		return "/Admin/addproduct";  
 	} 
 	 */
 	
-	@GetMapping("/admin/product")
+	@GetMapping("/admin")
 	public String listProduct(Model model) {
 		model.addAttribute("product", productService.getAllProduct());
 		return "/Admin/adminHome";
