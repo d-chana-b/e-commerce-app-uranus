@@ -56,7 +56,7 @@
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Product</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<form th:action="@{/admin/adminHome}" th:object="${product}" method="POST">
+			<form th:action="@{/admin/products/add}" th:object="${product}" method="POST" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label 
@@ -71,23 +71,16 @@
 						<div class="input-group-prepend" th:field="*{CategoryName}">
 							<label  for="inputGroupSelect01">CategoryName</label>
 						</div>
-						 <!--  <select class="custom-select" id="inputGroupSelect01" th:field="*{CategoryName}">
-							<option selected>Select Category</option>
-							<option value="1">Nike</option>
-							<option value="2">Puma</option>
-							<option value="3">New Balance</option>
-							<option value="3">Reebok</option>
-							<option value="3">New Balance</option>					
-						</select> -->
+						 <select class="custom-select" id="inputGroupSelect01" th:field="*{CategoryName}">
+							<option value="Brand">Brand</option>
+							<option value="Nike">Nike</option>
+							<option value="Puma">Puma</option>			
+							<option value="Reebok">Reebok</option>
+							<option value="New Balance">New Balance</option>					
+						</select> 
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="inputAddress">Quantity</label> <input 
-					type="text"
-					class="form-control" 
-					th:field = "*{Quantity}"
-					id="inputAddress">
-				</div>
+			
 				<div class="form-group">
 					<label for="inputAddress2">Price</label> <input 
 					type="text"
@@ -96,14 +89,15 @@
 					id="inputAddress2">
 				</div>
 				<div class="form-row">
+				<input type="hidden" name="imageName" th:value="${product.ProductImageName}">
 					<div class="form-group col-md-6">
 						<label for="productImage">Product Image</label> <input 
 						type="file"
 						accept="image/*" 
-						name="prodImage"
-						th:field = "*{ProductImage}" 
-						id="prodImage"
+						name="productImage"
+						id="productImage"
 						onchange="loadFile(event)"> 
+						
 						<img id="myImg" width="200" />
 					</div>
 				</div>
