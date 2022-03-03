@@ -15,6 +15,7 @@ public class Product {
 	private Long id;
 	
     private String ProductName;
+    private String CategoryName;
     private Long Quantity;
     private double Price;
     private String ProductImage;
@@ -73,6 +74,14 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public String getCategoryName() {
+		return CategoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		CategoryName = categoryName;
 	}
 
 }
