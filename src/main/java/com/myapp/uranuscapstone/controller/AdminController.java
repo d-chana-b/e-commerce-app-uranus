@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.myapp.uranuscapstone.dto.ProductDTO;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -24,8 +25,8 @@ import com.myapp.uranuscapstone.service.ProductService;
 public class AdminController {
 	
 	
-	@Autowired
-	ProductRepository productRepository;
+	//@Autowired
+	//ProductRepository productRepository;
 	
 	@Autowired
 	ProductService productService;
@@ -78,11 +79,18 @@ public class AdminController {
 	} */
 	
 	@PostMapping("/admin/product/add")
-	public String saveProduct(@ModelAttribute("product") Product product,
+	public String saveProduct(
+			@ModelAttribute("product") Product product,
 			@RequestParam("productImage") MultipartFile file,
 	@RequestParam("imageName")String imgName) throws IOException{
-
 	
+		Product existingProduct =new Product();
+		existingProduct.setId(product.getId());
+		existingProduct.setProductName(product.getProductName());
+		existingProduct.setCategoryName(product.getCategoryName());
+		existingProduct.setPrice(product.getPrice());
+		existingProduct.setProductImageName(product.getProductImageName());
+
 	String imageUUId;
 	if(!file.isEmpty()){
 	  imageUUId=file.getOriginalFilename();
@@ -100,22 +108,51 @@ public class AdminController {
 
 	
 	
-	@PostMapping("admin/update/{id}")
-	public String updateProduct(@PathVariable Long id,
-			@ModelAttribute("product") Product product,
-			Model model) {
+	@GetMapping("admin/update/{id}")
+	public String updateProduct(@PathVariable int id, Model model) {
+		Optional<Product> product = productService.getProductById(id);
 	
+/*
+		Product product1 =new Product();
+		product1.setId(product.getId());
+		product1.setProductName(product.getProductName());
+		product1.setCategoryName(product.getCategoryName());
+		product1.setPrice(product.getPrice());
+		product1.setProductImageName(product.getProductImageName());
+		
+		
+	
+		
+		model.addAttribute("product", product.getId());
+		
+		
+		return "/Admin/addproduct";
+		
+	}
+	*/
 	// get Product from database by id
-			Product existingProduct = productService.getProductById(id);
-			existingProduct.setId(id);
-			existingProduct.setProductName(product.getProductName());
-			existingProduct.setCategoryName(product.getCategoryName());				
-			existingProduct.setPrice(product.getPrice());
-			existingProduct.setProductImageName(product.getProductImageName());
+		//	Product existingProduct = productService.getProductById(id);
+		//	existingProduct.setId(id);
+		//	existingProduct.setProductName(product.getProductName());
+		//	existingProduct.setCategoryName(product.getCategoryName());				
+		//	existingProduct.setPrice(product.getPrice());
+		//	existingProduct.setProductImageName(product.getProductImageName());
 
+		
+		
 			// save updated student object
-				productService.updateProduct(existingProduct);
-				return "/Admin/adminHome";		
+			//	productService.updateProduct(existingProduct);
+		
+		
+		if(product.isPresent()) {
+			
+		model.addAttribute("product", product.get());
+			return "/Admin/addproduct";		
+		}else {
+			return "404";
+		}
+		
+			
 		}
 			
 			// handler method to handle delete student request
