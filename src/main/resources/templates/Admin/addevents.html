@@ -18,15 +18,14 @@
 <style>
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 </style>
-<title>Admin Add Product Page</title>
+<title>Admin Add Event Page</title>
 </head>
 <body>
 	<!-- Nav Bar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<span class="navbar-brand mb-0 h1"> <img src="#" width="30"
-			height="30" class="d-inline-block align-top" alt=""> Company
-			Name
+			height="30" class="d-inline-block align-top" alt=""> Drippin Kicks
 		</span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -50,22 +49,22 @@
 	<div class="container">
 		<div class="row">
 			<p>
-				<a class="btn btn-primary" th:href="@{/admin}" role="button">Back
+				<a class="btn btn-primary" th:href="#" role="button">Back
 					to Events</a>
 			</p>
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Event</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<form th:action="@{/admin/product/add}" th:object="${product}"
+			<form th:action="#" th:object="#"
 				method="POST" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Event Name</label> <input type="text"
-							name="ProductName" th:field="*{ProductName}" class="form-control"
+							name="EventName" th:field="*{EventName}" class="form-control"
 							id="inputEmail4">
 					</div>
 					<div class="form-group col-md-12">
-						<div class="input-group-prepend" th:field="*{CategoryName}">
+						<div class="input-group-prepend" th:field="*{EventName}">
 							<label for="inputGroupSelect01">Select Discount</label>
 						</div>
 
@@ -98,27 +97,19 @@
                     <input type="date" id="strtdte">
                     <p>End Date</p>
                     <input type="date" id="enddte">
-
-						<!--  	 <select class="custom-select" id="inputGroupSelect01" th:field="*{CategoryName}">
-							<option value="Brand">Brand</option>
-							<option value="Nike">Nike</option>
-							<option value="Puma">Puma</option>			
-							<option value="Reebok">Reebok</option>
-							<option value="New Balance">New Balance</option>					
-						</select> -->
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="inputAddress2">Remarks</label> <input type="text"
-						class="form-control" th:field="*{Price}" id="inputAddress2">
+						class="form-control" th:field="#" id="inputAddress2">
 				</div>
 				<div class="form-row">
 					<input type="hidden" name="imageName"
-						th:value="${product.ProductImageName}">
+						th:value="#">
 					<div class="form-group col-md-6">
-						<label for="productImage">Discount Image</label> <input type="file"
-							accept="image/*" name="productImage" id="productImage"
+						<label for="eventImage">Discount Image</label> <input type="file"
+							accept="image/*" name="eventImage" id="eventImage"
 							onchange="loadFile(event)"> <img id="myImg" width="200" />
 					</div>
 				</div>
