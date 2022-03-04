@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div class="regform">
+     <h1>Sign up here</h1>
+      <form class="register-form" id="register-form">
+        <p>First Name:</p>
+        <input type="text" id="fname" name="firstname" placeholder="First Name" required>
+        <p>Middle Name:</p>
+        <input type="text" id="mname" name="midname" placeholder="Middle Name" required>
+        <p>Last Name:</p>
+        <input type="text" id="lname" name="lastname" placeholder="Last Name" required>
+        <p>User Name:</p>
+        <input type="text" id="uname" name="username" placeholder="User Name" required>
+        <p>Email Address:</p>
+        <input type="email" id="emailadd" name="emailaddress" placeholder="Email Address" required>
+        <p>Password:</p>
+        <input id="password" type="password" placeholder="Password" required>
+        <p>Confirm Password:</p>
+        <input id="cpassword" type="password" name="confirmpassword" placeholder="Password">
+        <div id="errorMsg"></div>
+        <p><button type="submit" method="get">Register</button></p>
+        <div class="gotologin">
+            <p>Already have an account? <a href="Login.html">Login here.</a></p>
+        </div>
+      </form>
+     </div>
+     <script src="app.js"></script>
+  </body>
+</html>

@@ -50,7 +50,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">
-            <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="image/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
             Drippin Kicks</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -115,97 +115,13 @@
                 <li class="list" data-filter="NB">New Balance</li>
                 <li class="list" data-filter="Reebok">Reebok</li>
             </ul>
-            <div class="product">
+            <div class="product" th:each="product, iStat : ${products}">
                <div class="itemBox Nike">
-                    <img src="userImage/stussyaf1.jpg">
-                    <p>Nike Air Force 1</p>
-                    <h6>P9,000</h6>
+                    <img th:src="@{${'/product-photos/' + product.ProductImageName}}">
+                    <p th:text="${product.productName}">Nike Air Force 1</p>
+                    <h6 th:text="${product.price}">P9,000</h6>
                     <button value="get">Add to Cart</button>
                </div>
-               <div class="itemBox NB">
-                    <img src="userImage/nb5.jpg">
-                    <p>New Balance M574DGV2</p>
-                    <h6>P7,999</h6>
-                    <button value="get">Add to Cart</button>
-               </div>
-                <div class="itemBox NB">
-                    <img src="userImage/usa990v5.jpg">
-                    <p>New Balance USA 990v5 Core</p>
-                    <h6>P8,875</h6>
-                    <button value="get">Add to Cart</button>
-               </div>
-               <div class="itemBox Reebok">
-                    <img src="userImage/nano.jpg">
-                    <p>Reebok X1 Nano</p>
-                    <h6>P5,875</h6>
-                    <button value="get">Add to Cart</button>
-               </div>
-               <div class="itemBox Reebok">
-                    <img src="userImage/bball.jpg">
-                    <p>Reebok MID BALL</p>
-                    <h6>P5,000</h6>
-                    <button value="get">Add to Cart</button>
-               </div>
-               <div class="itemBox Adidas">
-                    <img src="userImage/adidaslego.jpg">
-                    <p>Adidas Ultraboost DNA X LEGO</p>
-                    <h6>P9,500</h6>
-                    <button value="get">Add to Cart</button>
-               </div>
-               <div class="itemBox Adidas">
-                    <img src="userImage/adidasforumlow.jpg">
-                    <p>Adidas Forum Low</p>
-                    <h6>P6,500</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-               <div class="itemBox Puma">
-                    <img src="userImage/pumarsx.jpg">
-                    <p>Puma RS-X</p>
-                    <h6>P5,500</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-                <div class="itemBox Puma">
-                    <img src="userImage/dis.jpg">
-                    <p>Puma Disperse XT</p>
-                    <h6>P5,749</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-               <div class="itemBox NB">
-                    <img src="userImage/nb550.jpg">
-                    <p>New Balance 550</p>
-                    <h6>P6,000</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-               <div class="itemBox Reebok">
-                    <img src="userImage/reebokclubc.jpg">
-                    <p>Reebok Club-C</p>
-                    <h6>P5,000</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-               <div class="itemBox Nike">
-                    <img src="userImage/mediumcurry.jpg">
-                    <p>Nike Dunk Low</p>
-                    <h6>P4,500</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-               <div class="itemBox Puma">
-                    <img src="userImage/pumasuede.jpg">
-                    <p>Puma Suede</p>
-                    <h6>P4,000</h6>
-                    <button value="get">Add to Cart</button>
-                </div>
-                <div class="itemBox Adidas">
-                    <img src="userImage/adidas4.jpg">
-                    <p>Adidas Superstar</p>
-                    <h6>P4,000</h6>
-                    <button value="get">Add to Cart</button>
-                 </div>
-                 <div class="itemBox Nike">
-                    <img src="userImage/jordan1.jpg">
-                    <p>Air Jordan 4</p>
-                    <h6>P8,000</h6>
-                    <button value="get">Add to Cart</button>
-                 </div>
             </div>
         </section>
         <br><br>
