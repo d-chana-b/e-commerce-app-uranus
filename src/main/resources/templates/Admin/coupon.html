@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <p>
-                <a class="btn btn-primary" href="addcoupon.html" role="button" >Add Coupon</a>
+                <a class="btn btn-primary" th:href="@{/admin/coupon/add}" role="button" >Add Coupon</a>
             </p>
             <table class="table table-hover">
                 <thead>
@@ -48,24 +48,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">A-1</td>
-                      <td>End of Month Sale</td>
-                      <td>February 25, 2020</td>
-                      <td>50%</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">A-2</td>
-                      <td>Start of Month Sale</td>
-                      <td>March 5, 2020</td>
-                      <td>75%</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">A-3</td>
-                      <td>Middle of Month Sale</td>
-                      <td>March 15, 2020</td>
-                      <td>90%</td>
-                    </tr>
+                    
                   </tbody>
               </table>
         </div>

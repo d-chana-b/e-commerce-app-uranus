@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.myapp.uranuscapstone.dto.ProductDTO;
+
+import com.myapp.uranuscapstone.model.Coupon;
 import com.myapp.uranuscapstone.model.Product;
-import com.myapp.uranuscapstone.repository.ProductRepository;
+
+import com.myapp.uranuscapstone.service.CouponService;
 import com.myapp.uranuscapstone.service.ProductService;
 
 @Controller
@@ -111,37 +113,6 @@ public class AdminController {
 	@GetMapping("admin/update/{id}")
 	public String updateProduct(@PathVariable int id, Model model) {
 		Optional<Product> product = productService.getProductById(id);
-	
-/*
-		Product product1 =new Product();
-		product1.setId(product.getId());
-		product1.setProductName(product.getProductName());
-		product1.setCategoryName(product.getCategoryName());
-		product1.setPrice(product.getPrice());
-		product1.setProductImageName(product.getProductImageName());
-		
-		
-	
-		
-		model.addAttribute("product", product.getId());
-		
-		
-		return "/Admin/addproduct";
-		
-	}
-	*/
-	// get Product from database by id
-		//	Product existingProduct = productService.getProductById(id);
-		//	existingProduct.setId(id);
-		//	existingProduct.setProductName(product.getProductName());
-		//	existingProduct.setCategoryName(product.getCategoryName());				
-		//	existingProduct.setPrice(product.getPrice());
-		//	existingProduct.setProductImageName(product.getProductImageName());
-
-		
-		
-			// save updated student object
-			//	productService.updateProduct(existingProduct);
 		
 		
 		if(product.isPresent()) {
@@ -163,9 +134,23 @@ public class AdminController {
 				return "redirect:/admin";
 		}
 	
+	//// Coupon Session
+			
+		@Autowired
+		CouponService couponService;
+		
+		@GetMapping("/admin/coupon")
+		public String listCoupon(Model model) {
+			model.addAttribute("coupon", couponService.getAllCoupon());
+			return "/Admin/coupon";
+		}
 	
-	
-	
+		@GetMapping("/admin/coupon/add")
+		public String createCouponForm(Model model) {		
+			// create coupon
+			model.addAttribute("coupon", new Coupon());
+			return "/Admin/addcoupon";  
+			}
 	
 	
 }
