@@ -56,9 +56,17 @@
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Product</p>
 			<div class="w-100 d-none d-md-block"></div>
+
+
+
 			<form th:action="@{/admin/product/add}" th:object="${product}"
 				method="POST" enctype="multipart/form-data">
 				<div class="form-row">
+
+					<div class="form-group col-md-12">
+						<label for="inputEmail4"></label> <input type="text" name="id"
+							th:field="*{id}" class="form-control" id="id" readonly hidden>
+					</div>
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Product Name</label> <input type="text"
 							name="ProductName" th:field="*{ProductName}" class="form-control"
@@ -71,28 +79,33 @@
 						<div class="form-group">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" id="option1" name="Nike"
-									class="custom-control-input" value="Nike" th:field="*{CategoryName}">
-								<label class="custom-control-label" for="option1">Nike</label>
+									class="custom-control-input" value="Nike"
+									th:field="*{CategoryName}"> <label
+									class="custom-control-label" for="option1">Nike</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" id="option2" name="Puma"
-									class="custom-control-input" value="Puma" th:field="*{CategoryName}">
-								<label class="custom-control-label" for="option2">Puma</label>
+									class="custom-control-input" value="Puma"
+									th:field="*{CategoryName}"> <label
+									class="custom-control-label" for="option2">Puma</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" id="option3" name="New Balance"
-									class="custom-control-input" value="New Balance" th:field="*{CategoryName}">
-								<label class="custom-control-label" for="option3">New Balance</label>
+									class="custom-control-input" value="New Balance"
+									th:field="*{CategoryName}"> <label
+									class="custom-control-label" for="option3">New Balance</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="option3" name="Addidas"
-									class="custom-control-input" value="Addidas" th:field="*{CategoryName}">
-								<label class="custom-control-label" for="option4">Addidas</label>
+								<input type="radio" id="option4" name="Addidas"
+									class="custom-control-input" value="Addidas"
+									th:field="*{CategoryName}"> <label
+									class="custom-control-label" for="option4">Addidas</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="option3" name="Reebok"
-									class="custom-control-input" value="Reebok" th:field="*{CategoryName}">
-								<label class="custom-control-label" for="option5">Reebok</label>
+								<input type="radio" id="option5" name="Reebok"
+									class="custom-control-input" value="Reebok"
+									th:field="*{CategoryName}"> <label
+									class="custom-control-label" for="option5">Reebok</label>
 							</div>
 						</div>
 					</div>
@@ -107,8 +120,14 @@
 						th:value="${product.ProductImageName}">
 					<div class="form-group col-md-6">
 						<label for="productImage">Product Image</label> <input type="file"
-							accept="image/*" name="productImage" id="productImage"
-							onchange="loadFile(event)"> <img id="myImg" width="200" />
+							accept="image/*" name="productImage" id="productImage">
+						<img id="myImg" width="200" />
+					</div>
+					<div class="form-group">
+						<img src="#" id="imgPreview" height="100px" width="100px"
+							th:src="@{${'/product-photos/' + product.productImageName}}"
+							style="margin-top: 20px" alt=" "> <input type="hidden"
+							name="imageName" th:value="${product.productImageName}">
 					</div>
 				</div>
 				<div class="form_action--button">
@@ -161,6 +180,30 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
 		crossorigin="anonymous"></script>
+
+
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#imgPreview').attr('src', e.target.result).width(100)
+							.height(100);
+				}
+				reader.readAsDataURL(input.files[0])
+			}
+		}
+		$('#productImage').change(function() {
+			readURL(this);
+		});
+		$(".custom-file-input").on(
+				"change",
+				function() {
+					var fileName = $(this).val().split("\\").pop();
+					$(this).siblings(".custom-file-label").addClass("selected")
+							.html(fileName);
+				});
+	</script>
 
 	<!-- Option 2: Separate Popper and Bootstrap JS -->
 	<!--

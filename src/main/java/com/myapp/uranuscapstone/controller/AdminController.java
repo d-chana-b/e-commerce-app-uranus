@@ -110,22 +110,26 @@ public class AdminController {
 	
 	@GetMapping("admin/update/{id}")
 	public String updateProduct(@PathVariable int id, Model model) {
-	Optional<Product> product = productService.getProductById(id);
+		Optional<Product> product = productService.getProductById(id);
 	
-/*	
-		Product Product =new Product();
-		Product.setId(product.getId());
-		Product.setProductName(product.getProductName());
-		Product.setCategoryName(product.getCategoryName());
-		Product.setPrice(product.getPrice());
-		Product.setProductImageName(product.getProductImageName());
-*/	//model.addAttribute("product", product.getId());
+/*
+		Product product1 =new Product();
+		product1.setId(product.getId());
+		product1.setProductName(product.getProductName());
+		product1.setCategoryName(product.getCategoryName());
+		product1.setPrice(product.getPrice());
+		product1.setProductImageName(product.getProductImageName());
 		
 		
-	//	return "/Admin/addproduct";
+	
+		
+		model.addAttribute("product", product.getId());
 		
 		
+		return "/Admin/addproduct";
 		
+	}
+	*/
 	// get Product from database by id
 		//	Product existingProduct = productService.getProductById(id);
 		//	existingProduct.setId(id);
@@ -138,6 +142,8 @@ public class AdminController {
 		
 			// save updated student object
 			//	productService.updateProduct(existingProduct);
+		
+		
 		if(product.isPresent()) {
 			
 		model.addAttribute("product", product.get());
