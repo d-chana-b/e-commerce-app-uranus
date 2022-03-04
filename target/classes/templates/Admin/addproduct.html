@@ -56,49 +56,59 @@
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Product</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<form th:action="@{/admin/product/add}" th:object="${product}" method="POST" enctype="multipart/form-data">
+			<form th:action="@{/admin/product/add}" th:object="${product}"
+				method="POST" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-group col-md-12">
-						<label 
-						for="inputEmail4">Product Name</label> <input 
-						type="text"
-						name="ProductName"
-						th:field = "*{ProductName}"					
-						class="form-control" 
-						id="inputEmail4">
+						<label for="inputEmail4">Product Name</label> <input type="text"
+							name="ProductName" th:field="*{ProductName}" class="form-control"
+							id="inputEmail4">
 					</div>
 					<div class="form-group col-md-12">
 						<div class="input-group-prepend" th:field="*{CategoryName}">
-							<label  for="inputGroupSelect01">CategoryName</label>
+							<label for="inputGroupSelect01">CategoryName</label>
 						</div>
-						 <select class="custom-select" id="inputGroupSelect01" th:field="*{CategoryName}">
-							<option value="Brand">Brand</option>
-							<option value="Nike">Nike</option>
-							<option value="Puma">Puma</option>			
-							<option value="Reebok">Reebok</option>
-							<option value="New Balance">New Balance</option>					
-						</select> 
+						<div class="form-group">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="option1" name="Nike"
+									class="custom-control-input" value="Nike" th:field="*{CategoryName}">
+								<label class="custom-control-label" for="option1">Nike</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="option2" name="Puma"
+									class="custom-control-input" value="Puma" th:field="*{CategoryName}">
+								<label class="custom-control-label" for="option2">Puma</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="option3" name="New Balance"
+									class="custom-control-input" value="New Balance" th:field="*{CategoryName}">
+								<label class="custom-control-label" for="option3">New Balance</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="option3" name="Addidas"
+									class="custom-control-input" value="Addidas" th:field="*{CategoryName}">
+								<label class="custom-control-label" for="option4">Addidas</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="option3" name="Reebok"
+									class="custom-control-input" value="Reebok" th:field="*{CategoryName}">
+								<label class="custom-control-label" for="option5">Reebok</label>
+							</div>
+						</div>
 					</div>
 				</div>
-			
+
 				<div class="form-group">
-					<label for="inputAddress2">Price</label> <input 
-					type="text"
-					class="form-control" 
-					th:field = "*{Price}"
-					id="inputAddress2">
+					<label for="inputAddress2">Price</label> <input type="text"
+						class="form-control" th:field="*{Price}" id="inputAddress2">
 				</div>
 				<div class="form-row">
-				<input type="hidden" name="imageName" th:value="${product.ProductImageName}">
+					<input type="hidden" name="imageName"
+						th:value="${product.ProductImageName}">
 					<div class="form-group col-md-6">
-						<label for="productImage">Product Image</label> <input 
-						type="file"
-						accept="image/*" 
-						name="productImage"
-						id="productImage"
-						onchange="loadFile(event)"> 
-						
-						<img id="myImg" width="200" />
+						<label for="productImage">Product Image</label> <input type="file"
+							accept="image/*" name="productImage" id="productImage"
+							onchange="loadFile(event)"> <img id="myImg" width="200" />
 					</div>
 				</div>
 				<div class="form_action--button">

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myapp.uranuscapstone.dto.ProductDTO;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -78,11 +79,18 @@ public class AdminController {
 	} */
 	
 	@PostMapping("/admin/product/add")
-	public String saveProduct(@ModelAttribute("product") Product product,
+	public String saveProduct(
+			@ModelAttribute("product") Product product,
 			@RequestParam("productImage") MultipartFile file,
 	@RequestParam("imageName")String imgName) throws IOException{
-
 	
+		Product existingProduct =new Product();
+		existingProduct.setId(product.getId());
+		existingProduct.setProductName(product.getProductName());
+		existingProduct.setCategoryName(product.getCategoryName());
+		existingProduct.setPrice(product.getPrice());
+		existingProduct.setProductImageName(product.getProductImageName());
+
 	String imageUUId;
 	if(!file.isEmpty()){
 	  imageUUId=file.getOriginalFilename();
@@ -102,8 +110,21 @@ public class AdminController {
 	
 	@GetMapping("admin/update/{id}")
 	public String updateProduct(@PathVariable int id, Model model) {
-		Optional<Product> product = productService.getProductById(id);
+	Optional<Product> product = productService.getProductById(id);
 	
+/*	
+		Product Product =new Product();
+		Product.setId(product.getId());
+		Product.setProductName(product.getProductName());
+		Product.setCategoryName(product.getCategoryName());
+		Product.setPrice(product.getPrice());
+		Product.setProductImageName(product.getProductImageName());
+*/	//model.addAttribute("product", product.getId());
+		
+		
+	//	return "/Admin/addproduct";
+		
+		
 		
 	// get Product from database by id
 		//	Product existingProduct = productService.getProductById(id);
@@ -113,11 +134,13 @@ public class AdminController {
 		//	existingProduct.setPrice(product.getPrice());
 		//	existingProduct.setProductImageName(product.getProductImageName());
 
+		
+		
 			// save updated student object
 			//	productService.updateProduct(existingProduct);
 		if(product.isPresent()) {
 			
-			model.addAttribute("product", product);
+		model.addAttribute("product", product.get());
 			return "/Admin/addproduct";		
 		}else {
 			return "404";
