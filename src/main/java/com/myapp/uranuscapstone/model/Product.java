@@ -13,16 +13,16 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	
     private String ProductName;
     private String CategoryName; 
     private double Price;
     private String ProductImageName;
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getProductName() {
@@ -49,7 +49,7 @@ public class Product {
 	public void setProductImageName(String productImageName) {
 		ProductImageName = productImageName;
 	}
-	public Product(Long id, String productName, String categoryName, double price, String productImageName) {
+	public Product(long id, String productName, String categoryName, double price, String productImageName) {
 		super();
 		this.id = id;
 		ProductName = productName;
