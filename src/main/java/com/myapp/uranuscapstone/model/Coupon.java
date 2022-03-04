@@ -1,30 +1,37 @@
 package com.myapp.uranuscapstone.model;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+
+
+
+
 @Entity
 public class Coupon {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="Coupon_ID")
-	private long CouponID;
+	private long ID;
 	
 	
 	private String CouponName;
 	private long Discount;
-	private String ExpiryDate;
+	private String Expiration;
 	
 	
-	public long getCouponID() {
-		return CouponID;
+	
+	public long getID() {
+		return ID;
 	}
-	public void setCouponID(long couponID) {
-		CouponID = couponID;
+	public void setID(long iD) {
+		ID = iD;
 	}
 	public String getCouponName() {
 		return CouponName;
@@ -38,20 +45,30 @@ public class Coupon {
 	public void setDiscount(long discount) {
 		Discount = discount;
 	}
-	public String getExpiryDate() {
-		return ExpiryDate;
-	}
-	public void setExpiryDate(String expiryDate) {
-		ExpiryDate = expiryDate;
-	}
+
 	
 	
-	public Coupon(long couponID, String couponName, long discount, String expiryDate) {
+	
+
+
+
+
+	
+
+	
+	
+	public Coupon(long iD, String couponName, long discount, String expiration) {
 		super();
-		CouponID = couponID;
+		ID = iD;
 		CouponName = couponName;
 		Discount = discount;
-		ExpiryDate = expiryDate;
+		Expiration = expiration;
+	}
+	public String getExpiration() {
+		return Expiration;
+	}
+	public void setExpiration(String expiration) {
+		Expiration = expiration;
 	}
 	public Coupon() {
 		super();

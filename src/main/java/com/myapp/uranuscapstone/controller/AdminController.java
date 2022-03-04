@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -134,14 +136,14 @@ public class AdminController {
 				return "redirect:/admin";
 		}
 	
-	//// Coupon Session
+	////////////////////// Coupon Session
 			
 		@Autowired
 		CouponService couponService;
 		
 		@GetMapping("/admin/coupon")
 		public String listCoupon(Model model) {
-			model.addAttribute("coupon", couponService.getAllCoupon());
+			model.addAttribute("coupons", couponService.getAllCoupon());
 			return "/Admin/coupon";
 		}
 	
@@ -152,5 +154,43 @@ public class AdminController {
 			return "/Admin/addcoupon";  
 			}
 	
-	
+		@PostMapping("/admin/coupon/add")
+		public String saveCoupon(@ModelAttribute("coupon") Coupon coupon)
+				
+		 /*		@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) */
+		
+		
+				{
+			
+				Coupon existingCoupon =new Coupon();
+				existingCoupon.setID(coupon.getID());
+				existingCoupon.setCouponName(coupon.getCouponName());
+				existingCoupon.setDiscount(coupon.getDiscount());
+				existingCoupon.setExpiration(coupon.getExpiration());
+				
+				
+	/*		couponService.getAllTestsByExpiryDate(date);   */
+				couponService.saveCoupon(coupon);
+				return "redirect:/admin/coupon";
+				}
+		
+		@GetMapping("admin/updatecoupon/{id}")
+		public String updateCoupon(@PathVariable int id, Model model) {
+			Optional<Coupon> coupon = couponService.getCouponById(id);
+			
+			
+			if(coupon.isPresent()) {
+				
+			model.addAttribute("coupon", coupon.get());
+				return "/Admin/addcoupon";		
+			}else {
+				return "404";
+			}		
+			}
+		
+		@GetMapping("admin/deletecoupon/{id}")
+		public String deleteCoupon(@PathVariable Long id) {
+				couponService.deleteCouponById(id);
+				return "redirect:/admin/coupon";
+		}
 }

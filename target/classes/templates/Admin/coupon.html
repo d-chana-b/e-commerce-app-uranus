@@ -44,11 +44,26 @@
                       <th scope="col">Coupon Name</th>
                       <th scope="col">Discount</th>
                       <th scope="col">Expiry Date</th>
+                      <th scope="col">Actions</th>
                       
                     </tr>
                   </thead>
                   <tbody>
-                    
+                    <tr th:each="coupon, iStat : ${coupons}">
+							<td scope="row" th:text="${iStat.index + 2}"></td>
+							<td th:text="${coupon.couponName}"></td>
+							<td th:text="${coupon.discount}"></td>
+							<td th:text="${coupon.expiration}"></td>
+							
+							<td><a 
+								th:href="@{/admin/deletecoupon/{id}(id=${coupon.iD})}"
+								class="btn btn-danger">Delete</a></td>
+							<td><a 
+								th:href="@{/admin/updatecoupon/{id}(id=${coupon.iD})}"
+								class="btn btn-warning">Update</a></td>
+							</tr>
+							
+							
                   </tbody>
               </table>
         </div>
