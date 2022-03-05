@@ -1,15 +1,15 @@
 package com.myapp.uranuscapstone.model;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Event {
@@ -21,14 +21,53 @@ public class Event {
 	
 	private String EventName;
 	private long Discount;
-	
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date StartDate;
-	
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "yyyy/MM/dd")
 	private Date EndDate;
+	
+	
+	
+	public long getID() {
+		return ID;
+	}
+	public void setID(long iD) {
+		ID = iD;
+	}
+	public String getEventName() {
+		return EventName;
+	}
+	public void setEventName(String eventName) {
+		EventName = eventName;
+	}
+	public long getDiscount() {
+		return Discount;
+	}
+	public void setDiscount(long discount) {
+		Discount = discount;
+	}
+	public Date getStartDate() {
+		return StartDate;
+	}
+	public void setStartDate(Date startDate) {
+		StartDate = startDate;
+	}
+	public Date getEndDate() {
+		return EndDate;
+	}
+	public void setEndDate(Date endDate) {
+		EndDate = endDate;
+	}
+	public Event(long iD, String eventName, long discount, Date startDate, Date endDate) {
+		super();
+		ID = iD;
+		EventName = eventName;
+		Discount = discount;
+		StartDate = startDate;
+		EndDate = endDate;
+	}
+	public Event() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	
