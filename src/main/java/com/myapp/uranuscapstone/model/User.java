@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Users {
+@Table(name = "users")
+public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,11 +26,11 @@ public class Users {
     //@Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
     
-    public Users() {
+    public User() {
     	
     }
     
-    public Users(Long id, String email, String password, String firstName, String lastName) {
+    public User(Long id, String email, String password, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.email = email;
