@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,19 +156,20 @@ public class AdminController {
 			}
 	
 		@PostMapping("/admin/coupon/add")
-		public String saveCoupon(@ModelAttribute("coupon") Coupon coupon)
+		public String saveCoupon(Coupon coupon)
+		
 				
 		 /*		@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) */
 		
 		
 				{
-			
+			/*
 				Coupon existingCoupon =new Coupon();
 				existingCoupon.setID(coupon.getID());
 				existingCoupon.setCouponName(coupon.getCouponName());
 				existingCoupon.setDiscount(coupon.getDiscount());
-				existingCoupon.setExpiration(coupon.getExpiration());
-				
+				existingCoupon.setExpirationDate(coupon.getExpirationDate());
+				*/
 				
 	/*		couponService.getAllTestsByExpiryDate(date);   */
 				couponService.saveCoupon(coupon);

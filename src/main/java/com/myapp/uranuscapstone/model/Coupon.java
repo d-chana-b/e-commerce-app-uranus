@@ -2,11 +2,17 @@ package com.myapp.uranuscapstone.model;
 
 
 
-import javax.persistence.Column;
+
+
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
+
 
 
 
@@ -23,7 +29,9 @@ public class Coupon {
 	
 	private String CouponName;
 	private long Discount;
-	private String Expiration;
+	
+	
+	private Date ExpirationDate;
 	
 	
 	
@@ -56,19 +64,19 @@ public class Coupon {
 	
 
 	
-	
-	public Coupon(long iD, String couponName, long discount, String expiration) {
+
+	public Coupon(long iD, String couponName, long discount, Date expirationDate) {
 		super();
 		ID = iD;
 		CouponName = couponName;
 		Discount = discount;
-		Expiration = expiration;
+		ExpirationDate = expirationDate;
 	}
-	public String getExpiration() {
-		return Expiration;
+	public Date getExpirationDate() {
+		return ExpirationDate;
 	}
-	public void setExpiration(String expiration) {
-		Expiration = expiration;
+	public void setExpirationDate(Date expirationDate) {
+		ExpirationDate = expirationDate;
 	}
 	public Coupon() {
 		super();

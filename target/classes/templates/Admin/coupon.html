@@ -53,7 +53,7 @@
 							<td scope="row" th:text="${coupon.iD}"></td>
 							<td th:text="${coupon.couponName}"></td>
 							<td th:text="${coupon.discount}"></td>
-							<td th:text="${coupon.expiration}"></td>
+							<td th:text="${coupon.expirationDate}"></td>
 							
 							<td><a 
 								th:href="@{/admin/deletecoupon/{id}(id=${coupon.iD})}"

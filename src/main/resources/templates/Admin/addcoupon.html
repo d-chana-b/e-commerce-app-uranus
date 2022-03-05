@@ -57,12 +57,12 @@
 			<form th:action="@{/admin/coupon/add}" th:object="${coupon}"
 				method="POST">
 				<div class="form-row">
-				
-				<div class="form-group col-md-12">
+
+					<div class="form-group col-md-12">
 						<label for="inputEmail4"></label><input type="text" name="iD"
 							th:field="*{iD}" class="form-control" id="iD" readonly hidden>
 					</div>
-				
+
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Coupon Name</label> <input type="text"
 							class="form-control" id="couponName" th:field="*{couponName}">
@@ -71,12 +71,12 @@
 						<label for="inputPassword4">Discount%</label> <input type="text"
 							class="form-control" id="discount" th:field="*{discount}">
 					</div>
-				
-				<div class="form-group col-md-12">
-						<label for="inputPassword4">Expiration Date (Month-dd-yyyy)</label> <input type="text"
-							class="form-control" id="expiration" th:field="*{expiration}">
+					<div class="form-group col-md-12">
+						<label for="expirationDate">Expiration Date:</label> <input type="date"
+							id="expirationDate" name="expirationDate" th:field="*{expirationDate}">
+
 					</div>
-					</div>
+				</div>
 				<br>
 				<div class="form_action--button">
 					<input class="btn btn-primary" type="submit" value="Submit">
