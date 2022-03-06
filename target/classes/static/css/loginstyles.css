@@ -1,89 +1,148 @@
-/* Made with love by Mutiullah Samim*/
-
-@import url('https://fonts.googleapis.com/css?family=Numans');
-
-html,body{
-background-image: url('images/leder_header.png');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-.container{
-height: 100%;
-align-content: center;
+body {
+    background: url('/image/background.jpg') no-repeat;
+    background-size: cover;
+    color: white;
 }
-
-.card{
-height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+.regform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
 }
-
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+.regform h1 { 
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px 0;
 }
-
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.regform p {
+    font-size: 15px;
+    margin: 5px 0;
 }
-
-.card-header h3{
-color: white;
+.regform input {
+    font-size: 15px;
+    padding: 5px 0px;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
 }
-
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+.regform button {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10 auto;
+    padding: 10px 15px;
+    width: 50%;
+    border: 0;
+    display: block;
+    align-items: center;
+    border-radius: 50px;
+    background-color: white;
 }
-
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+.gotologin{
+    text-align: center;
 }
-
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
+.loginform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
 }
-
-.remember{
-color: white;
+.loginform h1 { 
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px 0;
 }
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.loginform p {
+    font-size: 15px;
+    margin: 5px 0;
 }
-
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.loginform input {
+    font-size: 15px;
+    padding: 10px 0px;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
 }
-
-.login_btn:hover{
-color: black;
-background-color: white;
+.loginform button {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10 auto;
+    padding: 10px 15px;
+    width: 50%;
+    border: 0;
+    display: block;
+    align-items: center;
+    border-radius: 50px;
+    background-color: white;
 }
-
-.links{
-color: white;
+.homepage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
 }
-
-.links a{
-margin-left: 4px;
+.homepage h1 {
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px 0;
 }
+.check {
+   display: block;
+   padding-left: 15px;
+   text-indent: -15px;
+}
+.check input {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin: 5px auto;
+    vertical-align: bottom;
+    position: relative;
+    top: 5px;
+    left: auto;
+}
+.gotoregister {
+    text-align: center;
+}
+ .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  
+
+  .row.content {height: 450px}
+  
+
+  .sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+  }
+  
+
+  footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .sidenav {
+      height: auto;
+      padding: 15px;
+    }
+    .row.content {height:auto;} 
+  }
+  

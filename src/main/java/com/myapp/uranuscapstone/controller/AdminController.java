@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.myapp.uranuscapstone.model.Coupon;
+import com.myapp.uranuscapstone.model.LoginAdmin;
 import com.myapp.uranuscapstone.model.Product;
 
 import com.myapp.uranuscapstone.service.CouponService;
@@ -54,6 +55,30 @@ public class AdminController {
 		return "/Admin/addproduct";  
 	} 
 	 */
+	
+	// login page of admin
+	@GetMapping("/loginAdmin")
+	public String showLogin() {
+		return "/Admin/Login";
+	}
+	
+	
+	//Check for Credentials
+		 @PostMapping("/loginAdmin")
+		 public String login(@ModelAttribute(name="loginForm") LoginAdmin login, Model m) {
+		  String uname = login.getUsername();
+		  String pass = login.getPassword();
+		  if(uname.equals("Admin") && pass.equals("Admin@123")) {
+		   m.addAttribute("uname", uname);
+		   m.addAttribute("pass", pass);
+		   return "redirect:/admin";
+		  }
+		  m.addAttribute("error", "Incorrect Username & Password");
+		  return "/Admin/Login";
+		  
+		 }
+	
+	
 	
 	@GetMapping("/admin")
 	public String listProduct(Model model) {
