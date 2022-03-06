@@ -69,10 +69,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="event, iStat : ${events}">
+						<td scope="row"></td>
 						<td scope="row" th:text="${event.eventName}"></td>
+						<td th:text="${event.discount}"></td>	
 						<td th:text="${event.startDate}"></td>
 						<td th:text="${event.endDate}"></td>
-						<td th:text="${event.discount}"></td>
+				
 
 						<td><a th:href="@{/admin/deleteevent/{id}(id=${event.iD})}"
 							class="btn btn-danger">Delete</a></td>

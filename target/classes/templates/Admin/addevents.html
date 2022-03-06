@@ -49,14 +49,19 @@
 	<div class="container">
 		<div class="row">
 			<p>
-				<a class="btn btn-primary"  role="button">Back
+				<a class="btn btn-primary" th:href="@{/admin/event}" role="button">Back
 					to Events</a>
 			</p>
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Event</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<form  	th:object="${event}"method="POST" >
+			<form  	th:object="${event}" th:action="@{/admin/event/add}" method="POST" enctype="multipart/form-data" >
 				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="inputEmail4"></label><input type="text" name="id"
+							th:field="*{iD}" class="form-control" id="iD" readonly hidden>
+				</div>
+				
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Event Name</label> <input type="text"
 							name="eventName" th:field="*{eventName}" class="form-control"
@@ -69,33 +74,33 @@
 
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="10%" value="10%" checked> <label
-								class="form-check-label" for="exampleRadios1"> 10% </label>
+								id="10" value="10" th:field="*{discount}" checked> <label
+								class="form-check-label" for="exampleRadios1"> 10 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="20%" value="20%"> <label
-								class="form-check-label" for="exampleRadios2"> 20% </label>
+								id="20" value="20" th:field="*{discount}"> <label
+								class="form-check-label" for="exampleRadios2"> 20 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="30%" value="30%"> <label
-								class="form-check-label" for="exampleRadios3"> 30% </label>
+								id="30" value="30" th:field="*{discount}"> <label
+								class="form-check-label" for="exampleRadios3"> 30 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="40%" value="40%"> <label
-								class="form-check-label" for="exampleRadios4"> 40% </label>
+								id="40" value="40" th:field="*{discount}"> <label
+								class="form-check-label" for="exampleRadios4"> 40 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="50%" value="50%"> <label
-								class="form-check-label" for="exampleRadios5"> 50% </label>
+								id="50" value="50" th:field="*{discount}"> <label
+								class="form-check-label" for="exampleRadios5"> 50 </label>
 						</div>
                     <p>Start Date</p>
-                    <input type="date" id="strtdte">
+                    <input type="date" id="strtdte" th:field="*{startDate}">
                     <p>End Date</p>
-                    <input type="date" id="enddte">
+                    <input type="date" id="enddte" th:field="*{endDate}">
 					</div>
 				</div>
 

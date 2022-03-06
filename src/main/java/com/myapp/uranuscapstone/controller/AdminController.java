@@ -274,7 +274,7 @@ public class AdminController {
 			if(event.isPresent()) {
 				
 			model.addAttribute("event", event.get());
-				return "/Admin/addevent";		
+				return "/Admin/addevents";		
 			}else {
 				return "404";
 			}		
@@ -283,7 +283,7 @@ public class AdminController {
 		@GetMapping("admin/deleteevent/{id}")
 		public String deleteEvent(@PathVariable Long id) {
 				eventService.deleteEventById(id);
-				return "redirect:/admin/coupon";
+				return "redirect:/admin/event";
 		}
 		
 		
