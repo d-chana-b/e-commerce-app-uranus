@@ -21,10 +21,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.myapp.uranuscapstone.model.Coupon;
+<<<<<<< HEAD
 import com.myapp.uranuscapstone.model.LoginAdmin;
+=======
+import com.myapp.uranuscapstone.model.Event;
+>>>>>>> 7548d2acf4fb5bbc1cc8ce897aafa68f8d7befcd
 import com.myapp.uranuscapstone.model.Product;
 
 import com.myapp.uranuscapstone.service.CouponService;
+import com.myapp.uranuscapstone.service.EventService;
 import com.myapp.uranuscapstone.service.ProductService;
 
 @Controller
@@ -220,4 +225,67 @@ public class AdminController {
 				couponService.deleteCouponById(id);
 				return "redirect:/admin/coupon";
 		}
+		
+		
+		////////// EVENTS
+		@Autowired
+		EventService eventService;
+		
+		@GetMapping("/admin/event")
+		public String listEvent(Model model) {
+			model.addAttribute("events", eventService.getAllEvent());
+			return "/Admin/events";
+		}
+	
+		@GetMapping("/admin/event/add")
+		public String createEventForm(Model model) {		
+			// create events
+			model.addAttribute("event", new Event());
+			return "/Admin/addevents";  
+			}
+		
+		
+		@PostMapping("/admin/event/add")
+		public String saveEvent(Event event)
+		
+				
+		 /*		@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) */
+		
+		
+				{
+			/*
+				Coupon existingCoupon =new Coupon();
+				existingCoupon.setID(coupon.getID());
+				existingCoupon.setCouponName(coupon.getCouponName());
+				existingCoupon.setDiscount(coupon.getDiscount());
+				existingCoupon.setExpirationDate(coupon.getExpirationDate());
+				*/
+				
+	/*		couponService.getAllTestsByExpiryDate(date);   */
+				eventService.saveEvent(event);
+				return "redirect:/admin/event";
+				}
+		
+		@GetMapping("admin/updateevent/{id}")
+		public String updateEvent(@PathVariable int id, Model model) {
+			Optional<Event> event = eventService.getEventById(id);
+			
+			
+			if(event.isPresent()) {
+				
+			model.addAttribute("event", event.get());
+				return "/Admin/addevent";		
+			}else {
+				return "404";
+			}		
+			}
+		
+		@GetMapping("admin/deleteevent/{id}")
+		public String deleteEvent(@PathVariable Long id) {
+				eventService.deleteEventById(id);
+				return "redirect:/admin/coupon";
+		}
+		
+		
+		
 }
