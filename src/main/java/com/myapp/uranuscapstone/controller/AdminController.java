@@ -21,11 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.myapp.uranuscapstone.model.Coupon;
-<<<<<<< HEAD
+
 import com.myapp.uranuscapstone.model.LoginAdmin;
-=======
+
 import com.myapp.uranuscapstone.model.Event;
->>>>>>> 7548d2acf4fb5bbc1cc8ce897aafa68f8d7befcd
+
 import com.myapp.uranuscapstone.model.Product;
 
 import com.myapp.uranuscapstone.service.CouponService;
