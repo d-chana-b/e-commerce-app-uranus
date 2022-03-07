@@ -24,9 +24,9 @@
 	<!-- Nav Bar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<span class="navbar-brand mb-0 h1"> <img src="#" width="30"
-			height="30" class="d-inline-block align-top" alt=""> Company
-			Name
+		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png" width="40" height="40" 
+		class="d-inline-block align-top" alt="">
+        Dripin Kicks
 		</span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -36,8 +36,8 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav ml-auto">
-				<a class="nav-link" href="adminHome.html"><i class='fas fa-home'></i>Admin
-					Homepage</a> <a class="nav-link" href="#"><i
+				<a class="nav-link" th:href="@{/admin}"><i class='fas fa-home'></i>Admin
+					Homepage</a> <a class="nav-link" th:href="@{/loginAdmin}"><i
 					class='fas fa-sign-out-alt'></i>Logout</a>
 			</div>
 		</div>
@@ -49,10 +49,10 @@
 	<div class="container">
 		<div class="row">
 			<p>
-				<a th:href="@{/admin/coupon}">Back to Coupons</a>
+				<a class="btn btn-primary" th:href="@{/admin/coupon}" role="button">Back to Coupons</a>
 			</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<p>Add Product</p>
+			<p>Add Coupon</p>
 			<div class="w-100 d-none d-md-block"></div>
 			<form th:action="@{/admin/coupon/add}" th:object="${coupon}"
 				method="POST">
