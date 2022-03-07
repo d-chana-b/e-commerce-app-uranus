@@ -118,6 +118,8 @@ public class AdminController {
 			@ModelAttribute("product") Product product,
 			@RequestParam("productImage") MultipartFile file,
 	@RequestParam("imageName")String imgName) throws IOException{
+		
+	/*	
 	
 		Product existingProduct =new Product();
 		existingProduct.setId(product.getId());
@@ -126,6 +128,7 @@ public class AdminController {
 		existingProduct.setPrice(product.getPrice());
 		existingProduct.setProductImageName(product.getProductImageName());
 
+*/
 	String imageUUId;
 	if(!file.isEmpty()){
 	  imageUUId=file.getOriginalFilename();
