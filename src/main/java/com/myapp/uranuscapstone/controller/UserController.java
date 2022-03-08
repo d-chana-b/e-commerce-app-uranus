@@ -52,7 +52,7 @@ public class UserController {
 	
 	////// INDEX SESSION
 	// @RequestMapping ("/productService")
-		@Autowired
+	/*	@Autowired
 		private ProductService productService;		
 		
 		@GetMapping("/index")
@@ -62,7 +62,7 @@ public class UserController {
 		model.addAttribute("products", productService.sortedName("Nike"));
 		return "/User/index";
 		}
-		
+		*/
 		
 
 		

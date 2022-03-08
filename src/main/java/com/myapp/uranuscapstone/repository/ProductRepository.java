@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 
 	//@Query("select * from product where category_name = ?2")
 	//@Query( value = "SELECT * FROM product u WHERE u.category_name = 1", nativeQuery = true)
-	@Query("SELECT u FROM product u WHERE u.category_name = ?1")
-	public List<Product> findByName(String name);
+	//@Query("SELECT u FROM product u WHERE u.category_name = ?1")
+	//public List<Product> findByName(String name);
 	
 }
