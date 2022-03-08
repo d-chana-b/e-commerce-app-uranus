@@ -39,5 +39,8 @@ public class ProductService {
 		productRepository.deleteById(id);	
 	}
 	
+	public List<Product> sortedName(String categoryName) {
+		return productRepository.findAll();
+	}
 }
 

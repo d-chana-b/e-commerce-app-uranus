@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myapp.uranuscapstone.model.User;
-
+import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
 import com.myapp.uranuscapstone.service.ProductService;
 
@@ -53,23 +53,17 @@ public class UserController {
 	////// INDEX SESSION
 	// @RequestMapping ("/productService")
 		@Autowired
-		private ProductService productService;
+		private ProductService productService;		
 		
-		
-		@GetMapping("/index") 		// or ("/index-All"), hindi ko kasi mahanap yung button name ng "All" na category
+		@GetMapping("/index")
 		public String listProduct(Model model)
 		{
-		model.addAttribute("products", productService.getAllProduct());
-		return "/User/index";			// or "/index-All", again hindi ako sigurado
+		// model.addAttribute("products", productService.getAllProduct());
+		model.addAttribute("products", productService.sortedName("Nike"));
+		return "/User/index";
 		}
 		
 		
-	// Category Sorting
-		@GetMapping("/{productId}")
-		public String getProductById(Model model, @PathVariable("productId")String productId)
-			{
-			model.addAttribute("products", productService.getProductById());
-			return "/User/index";
-			}
+
 		
 	}
