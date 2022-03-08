@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -62,5 +63,13 @@ public class UserController {
 		return "/User/index";			// or "/index-All", again hindi ako sigurado
 		}
 		
-	
-}
+		
+	// Category Sorting
+		@GetMapping("/{productId}")
+		public String getProductById(Model model, @PathVariable("productId")String productId)
+			{
+			model.addAttribute("products", productService.getProductById());
+			return "/User/index";
+			}
+		
+	}
