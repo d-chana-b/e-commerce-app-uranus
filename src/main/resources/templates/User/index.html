@@ -119,10 +119,11 @@
             <div class="product" th:each="product, iStat : ${products}">
                <div class="itemBox Nike">
                     <img th:src="@{${'/product-photos/' + product.ProductImageName}}">
-                    <p th:text="${product.productName}">Nike Air Force 1</p>
-                    <h6 th:text="${product.price}">P9,000</h6>
+                    <p th:text="${product.productName}"></p>
+                    <h6 th:text="${product.price}"></h6>
                     <button value="get">Add to Cart</button>
                </div>
+               
             </div>
         </section>
         <br><br>
