@@ -13,8 +13,7 @@ import com.myapp.uranuscapstone.model.Product;
 @Repository
 public interface CustomProductRepository extends JpaRepository<Product, Long>{
 	
-	@Query("SELECT t FROM product t WHERE t.category_name = 'Nike'")
-	Optional<Product> findAllCategoryName();
+	//@Query("SELECT t FROM product t WHERE t.category_name = 'Nike'")
+	List<Product> findByCategory();
 
-}
-*/
+}*/

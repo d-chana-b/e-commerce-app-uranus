@@ -40,5 +40,8 @@ public class ProductService {
 	}
 	
 
+	public List<Product> getByCategoryName(String CategoryName){
+		return productRepository.findByCategoryName(CategoryName);
+	}
 }
 

@@ -67,6 +67,13 @@ public class UserController {
 		return "/User/index";
 		}
 		
+		@GetMapping("/index/product/{id}")
+		public String categorylist(@PathVariable(value = "id") String id, Model model)
+		{
+		model.addAttribute("products", productService.getByCategoryName(id));
+		// model.addAttribute("products", customProductService.getAllByName());
+		return "redirect:/index";
+		}
 		
 		// cart controller
 		@GetMapping("/cart")

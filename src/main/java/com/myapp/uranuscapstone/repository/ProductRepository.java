@@ -15,5 +15,5 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 	//@Query( value = "SELECT * FROM product u WHERE u.category_name = 1", nativeQuery = true)
 	//@Query("SELECT u FROM product u WHERE u.category_name = :categoryName")
 	//List<Product> findAllByName(@Param("categoryName") String name);
-	
+	List<Product> findByCategoryName(String categoryName);
 }
