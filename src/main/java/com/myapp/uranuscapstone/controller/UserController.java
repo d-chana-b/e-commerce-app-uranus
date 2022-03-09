@@ -68,6 +68,12 @@ public class UserController {
 		}
 		
 		
+		// cart controller
+		@GetMapping("/cart")
+		public String cartUser() {
+			return "/User/cart";
+		}
+		
 
 		
 	}
