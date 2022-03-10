@@ -17,6 +17,16 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/shopstyles.css">
 <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+   font-famiy: sans-serif;
+}
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 /*carousel css*/
 .carousel .carousel-item {
@@ -165,30 +175,9 @@
 	<br>
 	<br>
 	<!-- FOOTER-->
-	<footer class="page-footer"
-		style="background-color: #f2f2f2; padding: 25px;">
-
-		<div class="container col d-flex justify-content-center ">
-			<div class="row">
-				<div>
-					<center>
-						<p>All rights to brand manufacturers.</p>
-					</center>
-					<form class="form-inline">
-						Get deals: <input type="email" class="form-control" size="50"
-							placeholder="Email Address">
-						<button type="button" class="btn btn-danger">Sign Up</button>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright: <a href="#"> uranus.com</a>
-		</div>
-		<!-- Copyright -->
-	</footer>
+	<div class="footer">
+  	<p>All rights to brand manufacturers.</p>
+	</div>
 	<!-- Footer -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
