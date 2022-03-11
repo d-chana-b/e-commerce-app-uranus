@@ -18,14 +18,14 @@
 <style>
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-   font-famiy: sans-serif;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-famiy: sans-serif;
 }
 </style>
 <title>Admin Add Product Page</title>
@@ -34,9 +34,10 @@
 	<!-- Nav Bar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png" width="40" height="40" 
-		class="d-inline-block align-top" alt="">
-        Dripin Kicks</span>
+		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png"
+			width="40" height="40" class="d-inline-block align-top" alt="">
+			Dripin Kicks
+		</span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -82,10 +83,24 @@
 							id="inputEmail4">
 					</div>
 					<div class="form-group col-md-12">
-						<div class="input-group-prepend" th:field="*{CategoryName}">
+						<div class="input-group-prepend" th:field="*{category}">
 							<label for="inputGroupSelect01">Choose Category</label>
 						</div>
-						<div class="form-group">
+
+						<select class="form-control" th:field="*{category}" required>
+							<option th:each="category :${category}" th:value="${category.id}"
+								th:text="${category.name}" th:selected="${category.id}"></option>
+
+						</select>
+
+
+
+
+
+
+
+
+						<!-- <div class="form-group">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" id="option1" name="Nike"
 									class="custom-control-input" value="Nike"
@@ -116,7 +131,7 @@
 									th:field="*{CategoryName}"> <label
 									class="custom-control-label" for="option5">Reebok</label>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 
@@ -129,8 +144,8 @@
 						th:value="${product.ProductImageName}">
 					<div class="form-group col-md-6">
 						<label for="productImage">Product Image</label> <input type="file"
-							accept="image/*" name="productImage" id="productImage">
-						<img id="myImg" width="200" />
+							accept="image/*" name="productImage" id="productImage"> <img
+							id="myImg" width="200" />
 					</div>
 					<div class="form-group">
 						<img src="#" id="imgPreview" height="100px" width="100px"
@@ -152,7 +167,7 @@
 	<br>
 	<!-- FOOTER-->
 	<div class="footer">
-  	<p>All rights to brand manufacturers.</p>
+		<p>All rights to brand manufacturers.</p>
 	</div>
 	<!-- Footer -->
 

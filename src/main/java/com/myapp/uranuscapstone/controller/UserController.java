@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.myapp.uranuscapstone.model.User;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
+import com.myapp.uranuscapstone.service.CategoryService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
 
@@ -21,6 +22,8 @@ public class UserController {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	CategoryService categoryService;
 	
 	/*
 	@GetMapping("/index")
@@ -63,6 +66,7 @@ public class UserController {
 		public String listProduct(Model model)
 		{
 		 model.addAttribute("products", productService.getAllProduct());
+		 model.addAttribute("category", categoryService.getAllCategory());
 		//model.addAttribute("products", customProductService.getAllByName());
 		return "/User/index";
 		}
@@ -71,6 +75,7 @@ public class UserController {
 		public String categorylist(@PathVariable(value = "id") String id, Model model)
 		{
 		model.addAttribute("products", productService.getByCategoryName(id));
+		model.addAttribute("category", categoryService.getAllCategory());
 		// model.addAttribute("products", customProductService.getAllByName());
 		return "redirect:/index";
 		}
@@ -81,6 +86,14 @@ public class UserController {
 			return "/User/cart";
 		}
 		
+		@GetMapping("/index/category/{id}")
+		public String shopByCategory(Model model,
+				@PathVariable int id
+				) {
+			model.addAttribute("category", categoryService.getAllCategory());
+			 model.addAttribute("products", productService.getAllProductByCategoryId(id));
+			return "/User/index";
+		}
 
 		
 	}

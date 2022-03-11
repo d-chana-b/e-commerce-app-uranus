@@ -179,7 +179,7 @@ div h3 {
 						<tr th:each="product, iStat : ${products}">
 							<td scope="row" th:text="${iStat.index + 1}"></td>
 							<td th:text="${product.productName}"></td>
-							<td th:text="${product.categoryName}"></td>
+							<td th:text="${product.category.getName()}"></td>
 							<td th:text="${product.price}"></td>
 					 	<!--  <td th:text="${product.productImageName}"></td>  -->
 							 <td><img height="100px" width="100px"

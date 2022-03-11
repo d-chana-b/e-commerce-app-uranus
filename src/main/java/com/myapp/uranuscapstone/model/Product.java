@@ -16,7 +16,13 @@ public class Product {
 	private long id;
 	
     private String ProductName;
-    private String categoryName; 
+    
+    
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name= "category", referencedColumnName = "category_id")
+    private Category category; 
+    
+    
     private double Price;
     private String ProductImageName;
 	public long getId() {
@@ -31,11 +37,13 @@ public class Product {
 	public void setProductName(String productName) {
 		ProductName = productName;
 	}
-	public String getCategoryName() {
-		return categoryName;
+
+
+	public Category getCategory() {
+		return category;
 	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	public double getPrice() {
 		return Price;
@@ -49,11 +57,13 @@ public class Product {
 	public void setProductImageName(String productImageName) {
 		ProductImageName = productImageName;
 	}
-	public Product(long id, String productName, String categoryName, double price, String productImageName) {
+
+
+	public Product(long id, String productName, Category category, double price, String productImageName) {
 		super();
 		this.id = id;
 		ProductName = productName;
-		this.categoryName = categoryName;
+		this.category = category;
 		Price = price;
 		ProductImageName = productImageName;
 	}

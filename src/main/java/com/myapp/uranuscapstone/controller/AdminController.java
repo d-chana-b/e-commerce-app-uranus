@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.myapp.uranuscapstone.model.Category;
 import com.myapp.uranuscapstone.model.Coupon;
 
 import com.myapp.uranuscapstone.model.LoginAdmin;
@@ -27,7 +27,7 @@ import com.myapp.uranuscapstone.model.LoginAdmin;
 import com.myapp.uranuscapstone.model.Event;
 
 import com.myapp.uranuscapstone.model.Product;
-
+import com.myapp.uranuscapstone.service.CategoryService;
 import com.myapp.uranuscapstone.service.CouponService;
 import com.myapp.uranuscapstone.service.EventService;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -41,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	CategoryService categoryService;
 	
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/product-photos";
 	/*
@@ -96,6 +99,7 @@ public class AdminController {
 	public String createProductForm(Model model) {		
 		// create student object to hold student form data
 		model.addAttribute("product", new Product());
+		model.addAttribute("category", categoryService.getAllCategory());
 		return "/Admin/addproduct";  
 		}
 		
@@ -119,16 +123,15 @@ public class AdminController {
 			@RequestParam("productImage") MultipartFile file,
 	@RequestParam("imageName")String imgName) throws IOException{
 		
-	/*	
-	
-		Product existingProduct =new Product();
-		existingProduct.setId(product.getId());
-		existingProduct.setProductName(product.getProductName());
-		existingProduct.setCategoryName(product.getCategoryName());
-		existingProduct.setPrice(product.getPrice());
-		existingProduct.setProductImageName(product.getProductImageName());
+		/*
+		 * Product existingProduct =new Product();
+		 * existingProduct.setId(product.getId());
+		 * existingProduct.setProductName(product.getProductName());
+		 * existingProduct.setCategory(product.getCategory());
+		 * existingProduct.setPrice(product.getPrice());
+		 * existingProduct.setProductImageName(product.getProductImageName());
+		 */
 
-*/
 	String imageUUId;
 	if(!file.isEmpty()){
 	  imageUUId=file.getOriginalFilename();
@@ -140,6 +143,7 @@ public class AdminController {
 		} 
 	product.setProductImageName(imageUUId);
 	productService.saveProduct(product);
+	
 	return "redirect:/admin";
 	}
 	
@@ -148,6 +152,7 @@ public class AdminController {
 	
 	@GetMapping("admin/update/{id}")
 	public String updateProduct(@PathVariable int id, Model model) {
+		model.addAttribute("category", categoryService.getAllCategory());
 		Optional<Product> product = productService.getProductById(id);
 		
 		

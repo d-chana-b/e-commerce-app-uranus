@@ -132,22 +132,33 @@
 		<!-- category section-->
 		<section>
 			<ul>
-				<li class="list active" data-filter="All">All</li>
-				<li class="list" th:each="product, iStat : ${products}"><a
-					th:href="@{/index/product/{id}(id =${product.CategoryName})}"
-					th:text="${product.CategoryName}" /></a></li>
+			<a th:href="@{/index}"><li class="list-group-item">All Products</li></a>
+                <a  th:each="category, iStat : ${category}"
+                   th:href="@{/index/category/{id}(id=${category.id})}"><li
+                               class="list-group-item" th:text="${category.name}"></li></a>
+			
+			
+			
+			
+			
+				<!-- <li class="list active" data-filter="All">All</li>
+				<li class="list" th:each="category, iStat : ${category}"><a
+					th:href="@{/index/product/{id}(id =${category.id})}"
+					th:text="${category.name}" /></a></li>
 				<li class="list" data-filter="Nike">Nike</li>
 				<li class="list" data-filter="Adidas">Adidas</li>
 				<li class="list" data-filter="Puma">Puma</li>
 				<li class="list" data-filter="NB">New Balance</li>
-				<li class="list" data-filter="Reebok">Reebok</li>
+				<li class="list" data-filter="Reebok">Reebok</li> -->
 
 			</ul>
 			<div class="product" th:each="product, iStat : ${products}">
 				<div class="itemBox Nike">
 					<img th:src="@{${'/product-photos/' + product.ProductImageName}}">
 					<p th:text="${product.productName}"></p>
+				<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
 					<h6 th:text="${product.price}"></h6>
+					
 					<button value="get">Add to Cart</button>
 				</div>
 

@@ -39,7 +39,11 @@ public class ProductService {
 		productRepository.deleteById(id);	
 	}
 	
-
+	public List<Product> getAllProductByCategoryId(int id){
+		return productRepository.findAllProductByCategoryId(id);
+	}
+	
+	
 	public List<Product> getByCategoryName(String CategoryName){
 		return productRepository.findByCategoryName(CategoryName);
 	}
