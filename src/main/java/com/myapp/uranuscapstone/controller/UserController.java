@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.myapp.uranuscapstone.model.Cart;
 import com.myapp.uranuscapstone.model.User;
+import com.myapp.uranuscapstone.repository.CartRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
 import com.myapp.uranuscapstone.service.CategoryService;
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	CartRepository cartRepo;
 	
 	/*
 	@GetMapping("/index")
@@ -50,6 +55,7 @@ public class UserController {
 	    //user.setPassword(encodedPassword);
 	     
 	    userRepo.save(user);
+	  
 	     
 	    return "/User/register_success";
 	}

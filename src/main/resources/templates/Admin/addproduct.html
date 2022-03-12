@@ -75,11 +75,11 @@
 
 					<div class="form-group col-md-12">
 						<label for="inputEmail4"></label><input type="text" name="id"
-							th:field="*{id}" class="form-control" id="id" readonly hidden>
+							th:field="*{productId}" class="form-control" id="id" readonly hidden>
 					</div>
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Product Name</label> <input type="text"
-							name="ProductName" th:field="*{ProductName}" class="form-control"
+							name="ProductName" th:field="*{productName}" class="form-control"
 							id="inputEmail4">
 					</div>
 					<div class="form-group col-md-12">
@@ -137,11 +137,11 @@
 
 				<div class="form-group">
 					<label for="inputAddress2">Price</label> <input type="text"
-						class="form-control" th:field="*{Price}" id="inputAddress2">
+						class="form-control" th:field="*{price}" id="inputAddress2">
 				</div>
 				<div class="form-row">
 					<input type="hidden" name="imageName"
-						th:value="${product.ProductImageName}">
+						th:value="${product.productImageName}">
 					<div class="form-group col-md-6">
 						<label for="productImage">Product Image</label> <input type="file"
 							accept="image/*" name="productImage" id="productImage"> <img

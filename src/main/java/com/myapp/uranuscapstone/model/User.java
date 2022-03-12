@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Column(name="user_id")
+    private int userId;
      
     //@Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -26,25 +28,28 @@ public class User {
     //@Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
     
+    //@OneToOne(mappedBy = "users")
+    //private Cart cart;
+    
     public User() {
     	
     }
     
-    public User(Long id, String email, String password, String firstName, String lastName) {
+    public User(int id, String email, String password, String firstName, String lastName) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
-	public Long getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(int id) {
+		this.userId = id;
 	}
 
 	public String getEmail() {

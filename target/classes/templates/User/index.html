@@ -84,7 +84,7 @@
 			</div>
 			<div class="navbar-nav ml-auto">
 				<a class="nav-link" href="#"><i class='fas fa-user-alt'></i>Your
-					account</a> <a class="nav-link" href="cart.html"><i
+					account</a> <a class="nav-link" th:href="@{/cart}"><i
 					class='fas fa-cart-arrow-down'></i>Your cart</a> <a class="nav-link"
 					th:href="@{/login}"><i class='fas fa-sign-out-alt'></i>Logout</a>
 
@@ -134,8 +134,8 @@
 			<ul>
 			<a th:href="@{/index}"><li class="list-group-item">All Products</li></a>
                 <a  th:each="category, iStat : ${category}"
-                   th:href="@{/index/category/{id}(id=${category.id})}"><li
-                               class="list-group-item" th:text="${category.name}"></li></a>
+                   th:href="@{/index/category/{id}(id=${category.id})}">
+                   <li class="list-group-item" th:text="${category.name}"></li></a>
 			
 			
 			
@@ -154,7 +154,7 @@
 			</ul>
 			<div class="product" th:each="product, iStat : ${products}">
 				<div class="itemBox Nike">
-					<img th:src="@{${'/product-photos/' + product.ProductImageName}}">
+					<img th:src="@{${'/product-photos/' + product.productImageName}}">
 					<p th:text="${product.productName}"></p>
 				<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
 					<h6 th:text="${product.price}"></h6>

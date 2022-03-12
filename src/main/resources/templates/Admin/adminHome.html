@@ -183,13 +183,13 @@ div h3 {
 							<td th:text="${product.price}"></td>
 					 	<!--  <td th:text="${product.productImageName}"></td>  -->
 							 <td><img height="100px" width="100px"
-								th:src="@{${'/product-photos/' + product.ProductImageName}}"></td>
+								th:src="@{${'/product-photos/' + product.productImageName}}"></td>
 
 							<td><a href=""
-								th:href="@{/admin/delete/{id}(id=${product.id})}"
+								th:href="@{/admin/delete/{id}(id=${product.productId})}"
 								class="btn btn-danger">Delete</a></td>
 							<td><a href=""
-								th:href="@{/admin/update/{id}(id=${product.id})}"
+								th:href="@{/admin/update/{id}(id=${product.productId})}"
 								class="btn btn-warning">Update</a></td>
 
 						</tr>
