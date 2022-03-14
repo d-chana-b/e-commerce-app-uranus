@@ -9,84 +9,59 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
-        /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
-        .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-   font-famiy: sans-serif;
+       body{
+    font-family: 'Lato', sans-serif;
+    color: #888;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: linear-gradient(125deg,#ffffff,#ffffff);
 }
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: red;
+color: white;
+text-align: center;
+font-famiy: sans-serif;
+}
+
+
     </style>
-    <title>Admin Coupon Page</title>
+    <title> User Product Page</title>
 </head>
 <body>
     <!-- Nav Bar-->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">
-            <img src="/image/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+           <img src="/image/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
             Dripin Kicks</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-            <a class="nav-link" th:href="@{/admin}"><i class='fas fa-home'></i>Admin Homepage</a>
-            <a class="nav-link" th:href="@{/loginAdmin}"><i class='fas fa-sign-out-alt'></i>Logout</a>
+            <a class="nav-link" href="UserHome.html"><i class='fas fa-home'></i> User Homepage</a>
+            <a class="nav-link" href="#"><i class='fas fa-sign-out-alt'></i>Logout</a>
             </div>
+
+
+
+
         </div>
     </nav>
     <br><br><br>
     <!-- START HERE!!!!!-->
     <div class="container">
-        <div class="row">
-            <p>
-                <a class="btn btn-primary" th:href="@{/admin/coupon/add}" role="button" >Add Coupon</a>
-            </p>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                      <th scope="col">Coupon Code</th>
-                      <th scope="col">Coupon Name</th>
-                      <th scope="col">Discount %</th>
-                      <th scope="col">Event Name</th>
-                      <th scope="col">Expiration Date</th>
-                      <th scope="col">Actions</th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr th:each="coupon, iStat : ${coupons}">
-							<td scope="row" th:text="${coupon.id}"></td>
-							<td th:text="${coupon.couponName}"></td>
-							<td th:text="${coupon.discount}"></td>
-							<td th:text="${coupon.event.getEventName}"></td>
-							<td th:text="${coupon.event.getEndDate}"></td>
-							<!-- <td th:text="${coupon.expirationDate}"></td> -->
-							
-							<td><a 
-								th:href="@{/admin/deletecoupon/{id}(id=${coupon.id})}"
-								class="btn btn-danger">Delete</a></td>
-							<td><a 
-								th:href="@{/admin/updatecoupon/{id}(id=${coupon.id})}"
-								class="btn btn-warning">Update</a></td>
-							</tr>
-							
-							
-                  </tbody>
-              </table>
-        </div>
-    </div>
-    <!-- END HERE!!!!!!-->
-    <br><br><br>
+    </footer>
+    <!-- Footer -->
     <!-- FOOTER-->
-    <div class="footer">
-  	<p>All rights to brand manufacturers.</p>
-	</div>
+<div class="footer">
+    <p>All rights to brand manufacturers.</p>
+    </div>
     <!-- Footer -->
 
     <!-- Optional JavaScript; choose one of the two! -->
