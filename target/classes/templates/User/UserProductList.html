@@ -43,11 +43,20 @@ font-famiy: sans-serif;
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-link active" th:href="@{/index}">Home <span
+					class="sr-only">(current)</span></a> 
+					<a class="nav-link active" th:href="#">Products <span
+					class="sr-only">(current)</span></a> 
+					<a class="nav-link" href="#">Contact</a>
+				<a class="nav-link" href="#">About us</a>
+			</div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="UserHome.html"><i class='fas fa-home'></i> User Homepage</a>
-            <a class="nav-link" href="#"><i class='fas fa-sign-out-alt'></i>Logout</a>
+            <a class="nav-link" href="#"><i class='fas fa-cart-arrow-down'></i> Your Cart</a>
+            <a class="nav-link" href="#"><i class='fas fa-home'></i> Your Account</a>
+            <a class="nav-link" th:href="@{/login}"><i class='fas fa-sign-out-alt'></i>Logout</a>
             </div>
-
 
 
 
