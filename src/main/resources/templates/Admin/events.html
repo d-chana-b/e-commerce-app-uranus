@@ -71,7 +71,6 @@
 					<tr>
 						<th scope="col"></th>
 						<th scope="col">Name of the Event</th>
-						<th scope="col">Discount</th>
 						<th scope="col">Start Date</th>
 						<th scope="col">End Date</th>
 						<th scope="col">Actions</th>
@@ -82,14 +81,13 @@
 					<tr th:each="event, iStat : ${events}">
 						<td scope="row"></td>
 						<td scope="row" th:text="${event.eventName}"></td>
-						<td th:text="${event.discount}"></td>	
 						<td th:text="${event.startDate}"></td>
 						<td th:text="${event.endDate}"></td>
 				
 
-						<td><a th:href="@{/admin/deleteevent/{id}(id=${event.iD})}"
+						<td><a th:href="@{/admin/deleteevent/{id}(id=${event.id})}"
 							class="btn btn-danger">Delete</a></td>
-						<td><a th:href="@{/admin/updateevent/{id}(id=${event.iD})}"
+						<td><a th:href="@{/admin/updateevent/{id}(id=${event.id})}"
 							class="btn btn-warning">Update</a></td>
 					</tr>
 				</tbody>

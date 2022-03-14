@@ -2,87 +2,91 @@ package com.myapp.uranuscapstone.model;
 
 
 
-
-
-import java.sql.Date;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
-
-
-
-
-
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Coupon {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ID;
+	private long id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "event", referencedColumnName = "event_id")
+	private Event event;
+
+	private String couponName;
+	private long discount;
+
 	
 	
-	private String CouponName;
-	private long Discount;
-	
-	
-	private Date ExpirationDate;
-	
-	
-	
-	public long getID() {
-		return ID;
+	public long getId() {
+		return id;
 	}
-	public void setID(long iD) {
-		ID = iD;
+
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
+
+
+
+	public Event getEvent() {
+		return event;
+	}
+
+
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+
+
 	public String getCouponName() {
-		return CouponName;
+		return couponName;
 	}
+
+
+
 	public void setCouponName(String couponName) {
-		CouponName = couponName;
+		this.couponName = couponName;
 	}
+
+
+
 	public long getDiscount() {
-		return Discount;
+		return discount;
 	}
+
+
+
 	public void setDiscount(long discount) {
-		Discount = discount;
+		this.discount = discount;
 	}
 
-	
-	
-	
 
 
-
-
-	
-
-	
-
-	public Coupon(long iD, String couponName, long discount, Date expirationDate) {
+	public Coupon(long id, Event event, String couponName, long discount) {
 		super();
-		ID = iD;
-		CouponName = couponName;
-		Discount = discount;
-		ExpirationDate = expirationDate;
+		this.id = id;
+		this.event = event;
+		this.couponName = couponName;
+		this.discount = discount;
 	}
-	public Date getExpirationDate() {
-		return ExpirationDate;
-	}
-	public void setExpirationDate(Date expirationDate) {
-		ExpirationDate = expirationDate;
-	}
+
+
+
 	public Coupon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
 }

@@ -190,32 +190,22 @@ public class AdminController {
 		public String createCouponForm(Model model) {		
 			// create coupon
 			model.addAttribute("coupon", new Coupon());
+			model.addAttribute("event", eventService.getAllEvent());
 			return "/Admin/addcoupon";  
 			}
 	
 		@PostMapping("/admin/coupon/add")
-		public String saveCoupon(Coupon coupon)
+		public String saveCoupon(Coupon coupon) {
 		
 				
-		 /*		@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) */
-		
-		
-				{
-			/*
-				Coupon existingCoupon =new Coupon();
-				existingCoupon.setID(coupon.getID());
-				existingCoupon.setCouponName(coupon.getCouponName());
-				existingCoupon.setDiscount(coupon.getDiscount());
-				existingCoupon.setExpirationDate(coupon.getExpirationDate());
-				*/
-				
-	/*		couponService.getAllTestsByExpiryDate(date);   */
 				couponService.saveCoupon(coupon);
+			
 				return "redirect:/admin/coupon";
 				}
 		
 		@GetMapping("admin/updatecoupon/{id}")
 		public String updateCoupon(@PathVariable int id, Model model) {
+			model.addAttribute("event", eventService.getAllEvent());
 			Optional<Coupon> coupon = couponService.getCouponById(id);
 			
 			
@@ -254,22 +244,8 @@ public class AdminController {
 		
 		
 		@PostMapping("/admin/event/add")
-		public String saveEvent(Event event)
+		public String saveEvent(Event event) {
 		
-				
-		 /*		@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) */
-		
-		
-				{
-			/*
-				Coupon existingCoupon =new Coupon();
-				existingCoupon.setID(coupon.getID());
-				existingCoupon.setCouponName(coupon.getCouponName());
-				existingCoupon.setDiscount(coupon.getDiscount());
-				existingCoupon.setExpirationDate(coupon.getExpirationDate());
-				*/
-				
-	/*		couponService.getAllTestsByExpiryDate(date);   */
 				eventService.saveEvent(event);
 				return "redirect:/admin/event";
 				}

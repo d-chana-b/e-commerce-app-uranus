@@ -18,14 +18,14 @@
 <style>
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-   font-famiy: sans-serif;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-famiy: sans-serif;
 }
 </style>
 <title>Admin Add Event Page</title>
@@ -34,9 +34,9 @@
 	<!-- Nav Bar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png" width="40" height="40" 
-		class="d-inline-block align-top" alt="">
-        Dripin Kicks
+		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png"
+			width="40" height="40" class="d-inline-block align-top" alt="">
+			Dripin Kicks
 		</span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -66,62 +66,33 @@
 			<div class="w-100 d-none d-md-block" role="button"></div>
 			<p>Add Event</p>
 			<div class="w-100 d-none d-md-block"></div>
-			<form  	th:object="${event}" th:action="@{/admin/event/add}" method="POST" enctype="multipart/form-data" >
+			<form th:object="${event}" th:action="@{/admin/event/add}"
+				method="POST" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label for="inputEmail4"></label><input type="text" name="id"
-							th:field="*{iD}" class="form-control" id="iD" readonly hidden>
-				</div>
-				
+							th:field="*{id}" class="form-control" id="id" readonly hidden
+							>
+					</div>
+
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Event Name</label> <input type="text"
 							name="eventName" th:field="*{eventName}" class="form-control"
-							id="EventName">
+							id="eventName" placeholder="Enter an Event name">
 					</div>
 					<div class="form-group col-md-12">
-						<div class="input-group-prepend" th:field="*{discount}">
-							<label for="inputGroupSelect01">Select Discount</label>
-						</div>
-
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="10" value="10" th:field="*{discount}" checked> <label
-								class="form-check-label" for="exampleRadios1"> 10 </label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="20" value="20" th:field="*{discount}"> <label
-								class="form-check-label" for="exampleRadios2"> 20 </label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="30" value="30" th:field="*{discount}"> <label
-								class="form-check-label" for="exampleRadios3"> 30 </label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="40" value="40" th:field="*{discount}"> <label
-								class="form-check-label" for="exampleRadios4"> 40 </label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios"
-								id="50" value="50" th:field="*{discount}"> <label
-								class="form-check-label" for="exampleRadios5"> 50 </label>
-						</div>
-                    <p>Start Date</p>
-                    <input type="date" id="strtdte" th:field="*{startDate}">
-                    <p>End Date</p>
-                    <input type="date" id="enddte" th:field="*{endDate}">
+						<p>Start Date</p>
+						<input type="date" id="strtdte" th:field="*{startDate}">
+	
+						<p>End Date</p>
+						<input type="date" id="enddte" th:field="*{endDate}">
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="inputAddress2">Remarks</label> <input type="text"
-						class="form-control" id="inputAddress2">
-				</div>
-				
-					
-				
+
+
+
+
 				<div class="form_action--button">
 					<input class="btn btn-primary" type="submit" value="Submit">
 					<input class="btn btn-danger" type="reset" value="Reset">
@@ -136,7 +107,7 @@
 	<br>
 	<!-- FOOTER-->
 	<div class="footer">
-  	<p>All rights to brand manufacturers.</p>
+		<p>All rights to brand manufacturers.</p>
 	</div>
 	<!-- Footer -->
 
