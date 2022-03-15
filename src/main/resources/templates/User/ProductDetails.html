@@ -101,33 +101,28 @@
 	<!-- the body-->
 	<div class="container">
 
-		
+
 		<!-- 	<h4 th:text="${product.productName}"></h4>
 			<h3 th:text="${product.productPrice}"></h3> -->
-			
-			<div class="product" th:each="product, iStat : ${products}">
-				
-					<img th:src="@{${'/product-photos/' + product.productImageName}}">
-					<p th:text="${product.productName}"></p>
-					<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
-					<h6 th:text="${product.price}"></h6>
-					
-					
-				</div>
-			
-			
-			
-			
-				
-					<div >
-						<input type="text" value="1" name="quantity" id="quantity">
-					</div>
-				</div>
-				<button type="submit" class="primary-btn">add to cart</button>
-			
-	
 
-	
+		<div class="product" th:each="product, iStat : ${products}">
+
+			<img th:src="@{${'/product-photos/' + product.productImageName}}">
+			<p th:text="${product.productName}"></p>
+			<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
+			<h6 th:text="${product.price}"></h6>
+
+
+		</div>
+		<div>
+			<input type="text" value="1" name="quantity" id="quantity">
+		</div>
+	</div>
+	<button type="submit" class="primary-btn">add to cart</button>
+
+
+
+
 	<br>
 	<br>
 	<!-- end of category section-->
