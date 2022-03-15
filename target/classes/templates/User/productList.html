@@ -18,14 +18,14 @@
 <link rel="stylesheet" type="text/css" href="/css/shopstyles.css">
 <style>
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-   font-famiy: sans-serif;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-famiy: sans-serif;
 }
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 /*carousel css*/
@@ -79,11 +79,10 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-link active" th:href="@{/index}">Home <span
-					class="sr-only">(current)</span></a> 
-					<a class="nav-link active">Products <span
-					class="sr-only">(current)</span></a> 
-					<a class="nav-link" href="#">Contact</a>
-				<a class="nav-link" href="#">About us</a>
+					class="sr-only">(current)</span></a> <a class="nav-link active">Products
+					<span class="sr-only">(current)</span>
+				</a> <a class="nav-link" href="#">Contact</a> <a class="nav-link"
+					href="#">About us</a>
 			</div>
 			<div class="navbar-nav ml-auto">
 				<a class="nav-link" href="#"><i class='fas fa-user-alt'></i>Your
@@ -101,17 +100,19 @@
 
 	<!-- the body-->
 	<div class="container">
-		
+
 		<!-- category section-->
 		<section>
 			<ul>
-			<a th:href="@{/index/product_list}"><li class="list-group-item">All Products</li></a>
-                <a  th:each="category, iStat : ${category}"
-                   th:href="@{/index/category/{id}(id=${category.id})}">
-                   <li class="list-group-item" th:text="${category.name}"></li></a>
-			
-			
-			
+				<a th:href="@{/index/product_list}"><li class="list-group-item">All
+						Products</li></a>
+				<a th:each="category, iStat : ${category}"
+					th:href="@{/index/category/{id}(id=${category.id})}">
+					<li class="list-group-item" th:text="${category.name}"></li>
+				</a>
+
+
+
 
 
 			</ul>
@@ -119,16 +120,16 @@
 				<div class="itemBox Nike">
 					<img th:src="@{${'/product-photos/' + product.productImageName}}">
 					<p th:text="${product.productName}"></p>
-				<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
+					<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
 					<h6 th:text="${product.price}"></h6>
+					<a th:href="@{/index/product_details/{id}(id=${product.productId})}"
+						class="btn btn-primary">View Details</a>
 					
-					<button value="get">Add to Cart</button>
 				</div>
 
 			</div>
 		</section>
-		<br>
-		<br>
+		<br> <br>
 		<!-- end of category section-->
 
 		<br>
@@ -150,7 +151,7 @@
 	<br>
 	<!-- FOOTER-->
 	<div class="footer">
-  	<p>All rights to brand manufacturers.</p>
+		<p>All rights to brand manufacturers.</p>
 	</div>
 	<!-- Footer -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"

@@ -26,8 +26,19 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
-	public Optional<Product> getProductById(long id) {
+	public Optional<Product> getProductById(Long id) {
 		return productRepository.findById(id);
+	}
+	
+	public Product showProductById(Long id) {
+		Optional<Product> optional = productRepository.findById(id);
+		Product product = null;
+		if (optional.isPresent()) {
+			product = optional.get();
+		} else {
+			throw new RuntimeException(" Category not found for id :: " + id);
+		}
+		   return product;
 	}
 
 	public Product updateProduct(Product product) {

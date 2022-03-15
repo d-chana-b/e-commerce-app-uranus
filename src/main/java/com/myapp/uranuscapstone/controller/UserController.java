@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myapp.uranuscapstone.model.Cart;
+import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.User;
 import com.myapp.uranuscapstone.repository.CartRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
@@ -76,7 +77,7 @@ public class UserController {
 
 	@GetMapping("/test")
 	public String testPage() {
-		return "/User/productList";
+		return "/User/productDetails";
 	}
 
 	@GetMapping("/index/product/{id}")
@@ -94,6 +95,15 @@ public class UserController {
 		return "/User/productList";
 	}
 
+	//go to product details page
+	@GetMapping("/index/product_details/{id}")
+	public String showProductDetails(Model model, @PathVariable Long id) {
+		Product product = productService.showProductById(id);
+		model.addAttribute("product",product);
+		return "/User/productDetails";
+	}
+	
+	
 	// cart controller
 	@GetMapping("/cart")
 	public String cartUser() {

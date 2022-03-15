@@ -151,7 +151,7 @@ public class AdminController {
 	
 	
 	@GetMapping("admin/update/{id}")
-	public String updateProduct(@PathVariable int id, Model model) {
+	public String updateProduct(@PathVariable Long id, Model model) {
 		model.addAttribute("category", categoryService.getAllCategory());
 		Optional<Product> product = productService.getProductById(id);
 		
