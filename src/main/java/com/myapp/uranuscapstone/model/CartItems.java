@@ -1,5 +1,6 @@
 package com.myapp.uranuscapstone.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,11 +19,11 @@ public class CartItems {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartItemsId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name= "user_id", referencedColumnName = "user_id")
 	private User user;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name= "product_id", referencedColumnName = "product_id")
 	private Product product;
 		

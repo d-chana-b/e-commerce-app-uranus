@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myapp.uranuscapstone.model.Cart;
 import com.myapp.uranuscapstone.model.Product;
@@ -15,6 +16,7 @@ import com.myapp.uranuscapstone.model.User;
 import com.myapp.uranuscapstone.repository.CartRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
+import com.myapp.uranuscapstone.service.CartItemService;
 import com.myapp.uranuscapstone.service.CategoryService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
@@ -102,6 +104,20 @@ public class UserController {
 		model.addAttribute("products", productService.showProductById(id));
 		/* model.addAttribute("product",product); */
 		return "/User/productDetails";
+	}
+	
+	//add to cart functionality
+	@Autowired
+	CartItemService cartItemService;
+	
+	@PostMapping("/add_to_cart/{id}")
+	public String addToCart(@PathVariable Long id, @RequestParam("quantity") int qty) {
+		
+		Product product = productService.showProductById(id);
+		//User user = userService.getAuthUser(auth);
+		User user = new User();
+		cartItemService.addProduct(product, qty, user);
+		return "redirect:/index/product_list";
 	}
 	
 	

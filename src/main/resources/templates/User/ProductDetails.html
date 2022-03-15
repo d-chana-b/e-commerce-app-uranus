@@ -112,7 +112,7 @@
 			<img align="right" th:src="@{${'/product-photos/' + product.productImageName}}">
 			<br clear="left"/>
 			<div class="productDetails">
-			<form th:action="@{/add-to-cart/{id}(id = ${product.productId})}"
+			<form th:action="@{/add_to_cart/{id}(id = ${product.productId})}"
 				method="POST">
 				<p>Product Name</p>
 				<h4 th:text="${product.productName}"></h4>
