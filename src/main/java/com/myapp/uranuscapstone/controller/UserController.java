@@ -20,86 +20,84 @@ import com.myapp.uranuscapstone.service.ProductService;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	CategoryService categoryService;
-	
+
 	@Autowired
 	CartRepository cartRepo;
-	
-	/*
-	@GetMapping("/index")
-	public String userPage() {
-		return "/User/index";
-	}
-	 */
+
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
-	    model.addAttribute("user", new User());
-	     
-	    return "/User/Registration";
+		model.addAttribute("user", new User());
+
+		return "/User/Registration";
 	}
-	
+
 	@GetMapping("/login")
 	public String showLogin() {
 		return "/User/Login";
 	}
-	
+
 	@PostMapping("/process_register")
 	public String processRegister(User user) {
-	    //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    //String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    //user.setPassword(encodedPassword);
-	     
-	    userRepo.save(user);
-	  
-	     
-	    return "/User/register_success";
+		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		// String encodedPassword = passwordEncoder.encode(user.getPassword());
+		// user.setPassword(encodedPassword);
+
+		userRepo.save(user);
+
+		return "/User/register_success";
 	}
-	
+
 	////// INDEX SESSION
 	// @RequestMapping ("/productService")
-		@Autowired
-		private ProductService productService;
-		
-		//@Autowired
-		//private CustomProductService customProductService;
-		
-		@GetMapping("/index")
-		public String listProduct(Model model)
-		{
-		 model.addAttribute("products", productService.getAllProduct());
-		 model.addAttribute("category", categoryService.getAllCategory());
-		//model.addAttribute("products", customProductService.getAllByName());
+	@Autowired
+	private ProductService productService;
+
+	// @Autowired
+	// private CustomProductService customProductService;
+
+	@GetMapping("/index")
+	public String userPage() {
 		return "/User/index";
-		}
-		
-		@GetMapping("/index/product/{id}")
-		public String categorylist(@PathVariable(value = "id") String id, Model model)
-		{
+	}
+
+	@GetMapping("/index/product_list")
+	public String listProduct(Model model) {
+		model.addAttribute("products", productService.getAllProduct());
+		model.addAttribute("category", categoryService.getAllCategory());
+		// model.addAttribute("products", customProductService.getAllByName());
+		return "/User/productList";
+	}
+
+	@GetMapping("/test")
+	public String testPage() {
+		return "/User/productList";
+	}
+
+	@GetMapping("/index/product/{id}")
+	public String categorylist(@PathVariable(value = "id") String id, Model model) {
 		model.addAttribute("products", productService.getByCategoryName(id));
 		model.addAttribute("category", categoryService.getAllCategory());
 		// model.addAttribute("products", customProductService.getAllByName());
-		return "redirect:/index";
-		}
-		
-		// cart controller
-		@GetMapping("/cart")
-		public String cartUser() {
-			return "/User/cart";
-		}
-		
-		@GetMapping("/index/category/{id}")
-		public String shopByCategory(Model model,
-				@PathVariable int id
-				) {
-			model.addAttribute("category", categoryService.getAllCategory());
-			 model.addAttribute("products", productService.getAllProductByCategoryId(id));
-			return "/User/index";
-		}
-
-		
+		return "redirect:/index/product_list";
 	}
+
+	@GetMapping("/index/category/{id}")
+	public String shopByCategory(Model model, @PathVariable int id) {
+		model.addAttribute("category", categoryService.getAllCategory());
+		model.addAttribute("products", productService.getAllProductByCategoryId(id));
+		return "/User/productList";
+	}
+
+	// cart controller
+	@GetMapping("/cart")
+	public String cartUser() {
+		return "/User/cart";
+	}
+
+}

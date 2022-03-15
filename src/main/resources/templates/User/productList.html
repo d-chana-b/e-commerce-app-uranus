@@ -80,7 +80,7 @@
 			<div class="navbar-nav">
 				<a class="nav-link active" th:href="@{/index}">Home <span
 					class="sr-only">(current)</span></a> 
-					<a class="nav-link active" th:href="@{/index/product_list}">Products <span
+					<a class="nav-link active">Products <span
 					class="sr-only">(current)</span></a> 
 					<a class="nav-link" href="#">Contact</a>
 				<a class="nav-link" href="#">About us</a>
@@ -101,38 +101,32 @@
 
 	<!-- the body-->
 	<div class="container">
-		<!--carousel-->
-		<div id="demo" class="carousel slide" data-ride="carousel">
-
-			<!-- Indicators -->
-			<ul class="carousel-indicators">
-				<li data-target="#demo" data-slide-to="0" class="active"></li>
-				<li data-target="#demo" data-slide-to="1"></li>
-				<li data-target="#demo" data-slide-to="2"></li>
-			</ul>
-
-			<!-- The slideshow -->
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="userImage/collection1.jpg">
-				</div>
-				<div class="carousel-item">
-					<img src="userImage/collection2.jpg">
-				</div>
-				<div class="carousel-item">
-					<img src="userImage/collection3.jpg">
-				</div>
-			</div>
-
-			<!-- Left and right controls -->
-			<a class="carousel-control-prev" href="#demo" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>
-
-		</div>
 		
+		<!-- category section-->
+		<section>
+			<ul>
+			<a th:href="@{/index/product_list}"><li class="list-group-item">All Products</li></a>
+                <a  th:each="category, iStat : ${category}"
+                   th:href="@{/index/category/{id}(id=${category.id})}">
+                   <li class="list-group-item" th:text="${category.name}"></li></a>
+			
+			
+			
+
+
+			</ul>
+			<div class="product" th:each="product, iStat : ${products}">
+				<div class="itemBox Nike">
+					<img th:src="@{${'/product-photos/' + product.productImageName}}">
+					<p th:text="${product.productName}"></p>
+				<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
+					<h6 th:text="${product.price}"></h6>
+					
+					<button value="get">Add to Cart</button>
+				</div>
+
+			</div>
+		</section>
 		<br>
 		<br>
 		<!-- end of category section-->
