@@ -19,11 +19,11 @@ public class CartItems {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartItemsId;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	@JoinColumn(name= "user_id", referencedColumnName = "user_id")
 	private User user;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name= "product_id", referencedColumnName = "product_id")
 	private Product product;
 		
@@ -39,7 +39,7 @@ public class CartItems {
 		this.cartItemsId = cartItemsId;
 		this.user = user;
 		this.product = product;
-		quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	public int getCartItemsId() {
@@ -71,7 +71,7 @@ public class CartItems {
 	}
 
 	public void setQuantity(int quantity) {
-		quantity = quantity;
+		this.quantity = quantity;
 	}
 	
 	

@@ -1,7 +1,11 @@
 package com.myapp.uranuscapstone.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myapp.uranuscapstone.model.Cart;
+import com.myapp.uranuscapstone.model.CartItems;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.User;
 import com.myapp.uranuscapstone.repository.CartRepository;
@@ -20,6 +25,7 @@ import com.myapp.uranuscapstone.service.CartItemService;
 import com.myapp.uranuscapstone.service.CategoryService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
+import com.myapp.uranuscapstone.service.UserService;
 
 @Controller
 public class UserController {
@@ -47,9 +53,9 @@ public class UserController {
 
 	@PostMapping("/process_register")
 	public String processRegister(User user) {
-		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		// String encodedPassword = passwordEncoder.encode(user.getPassword());
-		// user.setPassword(encodedPassword);
+		 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		 String encodedPassword = passwordEncoder.encode(user.getPassword());
+		 user.setPassword(encodedPassword);
 
 		userRepo.save(user);
 
@@ -110,20 +116,29 @@ public class UserController {
 	@Autowired
 	CartItemService cartItemService;
 	
+	@Autowired
+	UserService userService;
+	
 	@PostMapping("/add_to_cart/{id}")
 	public String addToCart(@PathVariable Long id, @RequestParam("quantity") int qty) {
-		
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Product product = productService.showProductById(id);
-		//User user = userService.getAuthUser(auth);
-		User user = new User();
+		User user = userService.getAuthUser(auth);
 		cartItemService.addProduct(product, qty, user);
 		return "redirect:/index/product_list";
 	}
 	
 	
 	// cart controller
+	
 	@GetMapping("/cart")
-	public String cartUser() {
+	public String cartUser(Model model) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getAuthUser(auth);
+		
+		List<CartItems> cartItems = cartItemService.index(user);
+		
+		model.addAttribute("cartItem",cartItems);
 		return "/User/cart";
 	}
 

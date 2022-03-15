@@ -7,7 +7,7 @@
     <body>
         <div class="loginform">
             <h1>Sign in here</h1>
-            <form class="login-form" id="login-form">
+            <form class="login-form" id="login-form" th:action="@{/login}" method="POST">
                 <p>Email Address:</p>
                 <input type="email" name="email" placeholder="Email" required>
                 <p>Password:</p>
@@ -15,7 +15,7 @@
                 <div class="check">
                     <input type="checkbox" name="RememberMe" id="IsRememberMe"> Remember me
                 </div>
-                <p><button type="submit" value="Login" onclick="RememberMe" formaction="Welcome.html">Sign In</button></p>
+                <p><button type="submit" value="Login" onclick="RememberMe">Sign In</button></p>
                 <div class="gotoregister">
                 <p>Not yet registered? <a th:href="@{/register}">Register here.</a></p>
                 </div>

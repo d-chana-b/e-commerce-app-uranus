@@ -23,15 +23,15 @@
                         <div class="col align-self-center text-right text-muted">3 items</div>
                     </div>
                 </div>
-                <div class="row border-top border-bottom">
+                <div class="row border-top border-bottom" th:each="item : ${cartItem}">
                     <div class="row main align-items-center">
                         <div class="col-2"><img class="img-fluid" src="images/nike.jpg"></div>
                         <div class="col">
-                            <div class="row text-muted">shoes</div>
-                            <div class="row">shoes</div>
+                            <div class="row text-muted" th:text="${item.product.productName}"></div>
+                            <div class="row"></div>
                         </div>
                         <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                        <div class="col">₱ 44.00 <span class="close">&#10005;</span></div>
+                        <div class="col" th:text="${item.product.price}"><span class="close">&#10005;</span></div>
                     </div>
                 </div>
                 <div class="row">
