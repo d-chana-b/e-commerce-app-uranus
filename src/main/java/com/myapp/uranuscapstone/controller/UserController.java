@@ -98,8 +98,9 @@ public class UserController {
 	//go to product details page
 	@GetMapping("/index/product_details/{id}")
 	public String showProductDetails(Model model, @PathVariable Long id) {
-		Product product = productService.showProductById(id);
-		model.addAttribute("product",product);
+		/* Product product = productService.showProductById(id); */
+		model.addAttribute("products", productService.showProductById(id));
+		/* model.addAttribute("product",product); */
 		return "/User/productDetails";
 	}
 	
