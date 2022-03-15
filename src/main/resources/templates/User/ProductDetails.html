@@ -102,24 +102,34 @@
 	<div class="container">
 
 
-		<!-- 	<h4 th:text="${product.productName}"></h4>
-			<h3 th:text="${product.productPrice}"></h3> -->
+<!--  DITO KA MAG AYOS PRE NG STYLE NG PRODUCT DETAILS -->
 
-		<div class="product" th:each="product, iStat : ${products}">
+		<div class="productImage" th:each="product, iStat : ${products}">
 
 			<img th:src="@{${'/product-photos/' + product.productImageName}}">
-			<p th:text="${product.productName}"></p>
-			<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
-			<h6 th:text="${product.price}"></h6>
-
-
+			
+			<div class="productDetails">
+			<form th:action="@{/add-to-cart/{id}(id = ${product.productId})}"
+				method="POST">
+				<p>Product Name</p>
+				<h4 th:text="${product.productName}"></h4>
+				
+				<p>Category:</p>
+				<h5 th:text="${product.category.getName()}"></h5>
+				
+				<p>Price:</p>
+				<h6 th:text="${product.price}"></h6>
+				<div>
+				<label>Quantity:</label>
+					<input type="text" value="1" name="quantity" id="quantity">
+				</div>
+				<button type="submit" class="primary-btn">add to cart</button>
+			</form>
 		</div>
-		<div>
-			<input type="text" value="1" name="quantity" id="quantity">
 		</div>
+		
+
 	</div>
-	<button type="submit" class="primary-btn">add to cart</button>
-
 
 
 
