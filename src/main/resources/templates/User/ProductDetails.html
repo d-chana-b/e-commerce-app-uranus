@@ -17,6 +17,9 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/shopstyles.css">
 <style>
+* {
+	box-sizing: border-box;
+}
 .footer {
 	position: fixed;
 	left: 0;
@@ -106,8 +109,8 @@
 
 		<div class="productImage" th:each="product, iStat : ${products}">
 
-			<img th:src="@{${'/product-photos/' + product.productImageName}}">
-			
+			<img align="right" th:src="@{${'/product-photos/' + product.productImageName}}">
+			<br clear="left"/>
 			<div class="productDetails">
 			<form th:action="@{/add-to-cart/{id}(id = ${product.productId})}"
 				method="POST">
