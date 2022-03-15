@@ -111,8 +111,7 @@
 					<p th:text="${product.productName}"></p>
 					<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
 					<h6 th:text="${product.price}"></h6>
-					<a th:href="@{/index/product_details/{id}(id=${product.productId})}">
-						<!-- class="btn btn-primary">View Details</a> --> </a>
+					
 					
 				</div>
 			
@@ -120,7 +119,7 @@
 			
 			
 				
-					<div class="pro-qty">
+					<div >
 						<input type="text" value="1" name="quantity" id="quantity">
 					</div>
 				</div>
