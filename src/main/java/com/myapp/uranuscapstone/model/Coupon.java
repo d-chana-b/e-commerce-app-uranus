@@ -1,7 +1,5 @@
 package com.myapp.uranuscapstone.model;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,58 +19,52 @@ public class Coupon {
 	@JoinColumn(name = "event", referencedColumnName = "event_id")
 	private Event event;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
+	private Category category;
+
 	private String couponName;
 	private long discount;
 
-	
-	
 	public long getId() {
 		return id;
 	}
-
-
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
-
 	public Event getEvent() {
 		return event;
 	}
-
-
 
 	public void setEvent(Event event) {
 		this.event = event;
 	}
 
-
-
 	public String getCouponName() {
 		return couponName;
 	}
-
-
 
 	public void setCouponName(String couponName) {
 		this.couponName = couponName;
 	}
 
-
-
 	public long getDiscount() {
 		return discount;
 	}
-
-
 
 	public void setDiscount(long discount) {
 		this.discount = discount;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Coupon(long id, Event event, String couponName, long discount) {
 		super();
@@ -81,8 +73,6 @@ public class Coupon {
 		this.couponName = couponName;
 		this.discount = discount;
 	}
-
-
 
 	public Coupon() {
 		super();

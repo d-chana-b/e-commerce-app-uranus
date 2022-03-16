@@ -18,14 +18,14 @@
 <style>
 /* kung ndi naman ganun karami yung style nyo, no need na gumawa ng .css file dito nyo na lang ilagay*/
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-   font-famiy: sans-serif;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-famiy: sans-serif;
 }
 </style>
 <title>Admin Add Coupon Page</title>
@@ -34,9 +34,9 @@
 	<!-- Nav Bar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png" width="40" height="40" 
-		class="d-inline-block align-top" alt="">
-        Dripin Kicks
+		<span class="navbar-brand mb-0 h1"> <img src="/image/logo.png"
+			width="40" height="40" class="d-inline-block align-top" alt="">
+			Dripin Kicks
 		</span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -59,7 +59,8 @@
 	<div class="container">
 		<div class="row">
 			<p>
-				<a class="btn btn-primary" th:href="@{/admin/coupon}" role="button">Back to Coupons</a>
+				<a class="btn btn-primary" th:href="@{/admin/coupon}" role="button">Back
+					to Coupons</a>
 			</p>
 			<div class="w-100 d-none d-md-block"></div>
 			<p>Add Coupon</p>
@@ -76,6 +77,17 @@
 					<div class="form-group col-md-12">
 						<label for="inputEmail4">Coupon Name</label> <input type="text"
 							class="form-control" id="couponName" th:field="*{couponName}">
+					</div>
+					<div class="form-group col-md-12">
+
+						<label for="exampleFormControlSelect1">Select Category</label> <select
+							class="form-control" th:field="*{category}" id="id"
+							name="id">
+							<option th:each="category :${category}"
+								th:value="${category.id}"
+								th:text="${category.name}" />
+						</select>
+
 					</div>
 					<div class="form-group col-md-12">
 						<div class="input-group-prepend" th:field="*{discount}">
@@ -106,9 +118,9 @@
 							<input class="form-check-input" type="radio" name="exampleRadios"
 								id="50" value="50" th:field="*{discount}"> <label
 								class="form-check-label" for="exampleRadios5"> 50% </label>
-						</div>		
+						</div>
 					</div>
-					
+
 					<div class="form-group col-md-12">
 						<div class="input-group-prepend" th:field="*{event}">
 							<label for="inputGroupSelect01">Choose Event</label>
@@ -119,8 +131,8 @@
 								th:text="${event.eventName}" th:selected="${event.id}"></option>
 
 						</select>
-						</div>
-				<!-- 	<div class="form-group col-md-12">
+					</div>
+					<!-- 	<div class="form-group col-md-12">
 						<label for="expirationDate">Expiration Date:</label> <input type="date"
 							id="expirationDate" name="expirationDate" th:field="*{expirationDate}">
 					</div> -->
@@ -142,7 +154,7 @@
 	<br>
 	<!-- FOOTER-->
 	<div class="footer">
-  	<p>All rights to brand manufacturers.</p>
+		<p>All rights to brand manufacturers.</p>
 	</div>
 	<!-- Footer -->
 

@@ -17,6 +17,9 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/shopstyles.css">
 <style>
+* {
+	box-sizing: border-box;
+}
 .footer {
 	position: fixed;
 	left: 0;
@@ -101,33 +104,38 @@
 	<!-- the body-->
 	<div class="container">
 
-		
-		<!-- 	<h4 th:text="${product.productName}"></h4>
-			<h3 th:text="${product.productPrice}"></h3> -->
-			
-			<div class="product" th:each="product, iStat : ${products}">
+
+<!--  DITO KA MAG AYOS PRE NG STYLE NG PRODUCT DETAILS -->
+
+		<div class="productImage" th:each="product, iStat : ${products}">
+
+			<img align="right" th:src="@{${'/product-photos/' + product.productImageName}}">
+			<br clear="left"/>
+			<div class="productDetails">
+			<form th:action="@{/add_to_cart/{id}(id = ${product.productId})}"
+				method="POST">
+				<p>Product Name</p>
+				<h4 th:text="${product.productName}"></h4>
 				
-					<img th:src="@{${'/product-photos/' + product.productImageName}}">
-					<p th:text="${product.productName}"></p>
-					<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
-					<h6 th:text="${product.price}"></h6>
-					
-					
-				</div>
-			
-			
-			
-			
+				<p>Category:</p>
+				<h5 th:text="${product.category.getName()}"></h5>
 				
-					<div >
-						<input type="text" value="1" name="quantity" id="quantity">
-					</div>
+				<p>Price:</p>
+				<h6 th:text="${product.price}"></h6>
+				<div>
+				<label>Quantity:</label>
+					<input type="hidden" value="1" name="quantity" id="quantity">
 				</div>
 				<button type="submit" class="primary-btn">add to cart</button>
-			
-	
+			</form>
+		</div>
+		</div>
+		
 
-	
+	</div>
+
+
+
 	<br>
 	<br>
 	<!-- end of category section-->

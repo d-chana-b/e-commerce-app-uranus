@@ -1,5 +1,5 @@
 package com.myapp.uranuscapstone.custom;
-/*
+
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -60,6 +60,10 @@ public class CustomUserDetails implements UserDetails {
 	public String getFullName() {
 		return user.getFirstName() + " " + user.getLastName();
 	}
+	
+	public User getUser() {
+		return this.user;
+	}
 
 }
-*/
+

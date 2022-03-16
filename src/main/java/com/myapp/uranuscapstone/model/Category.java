@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 
@@ -22,10 +23,14 @@ public class Category {
 	@Column(nullable=false)
 	private String name;
 	
-	/*
-	 * @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) private
-	 * List<Product> products;
-	 */
+	
+	  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) 
+	  private List<Coupon> coupons;
+	  
+	  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) 
+	  private List<Product> products;
+	  
+	 
 
 	public String getName() {
 		return name;

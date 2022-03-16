@@ -1,26 +1,39 @@
 package com.myapp.uranuscapstone.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.myapp.uranuscapstone.model.Cart;
+import com.myapp.uranuscapstone.model.CartItems;
+import com.myapp.uranuscapstone.model.Coupon;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.User;
-import com.myapp.uranuscapstone.repository.CartRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
+import com.myapp.uranuscapstone.service.CartItemService;
 import com.myapp.uranuscapstone.service.CategoryService;
+import com.myapp.uranuscapstone.service.CouponService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
+import com.myapp.uranuscapstone.service.UserService;
 
 @Controller
 public class UserController {
+	
+	private final int DISCOUNT_DIVIDER = 100; // for cart items diveder
 
 	@Autowired
 	UserRepository userRepo;
@@ -28,8 +41,6 @@ public class UserController {
 	@Autowired
 	CategoryService categoryService;
 
-	@Autowired
-	CartRepository cartRepo;
 
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
@@ -45,9 +56,9 @@ public class UserController {
 
 	@PostMapping("/process_register")
 	public String processRegister(User user) {
-		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		// String encodedPassword = passwordEncoder.encode(user.getPassword());
-		// user.setPassword(encodedPassword);
+		 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		 String encodedPassword = passwordEncoder.encode(user.getPassword());
+		 user.setPassword(encodedPassword);
 
 		userRepo.save(user);
 
@@ -104,11 +115,102 @@ public class UserController {
 		return "/User/productDetails";
 	}
 	
+	//add to cart functionality
+	@Autowired
+	CartItemService cartItemService;
+	
+	@Autowired
+	UserService userService;
+	
+	@PostMapping("/add_to_cart/{id}")
+	public String addToCart(@PathVariable Long id) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Product product = productService.showProductById(id);
+		User user = userService.getAuthUser(auth);
+		int quantity = 1;
+		cartItemService.addProduct(product, quantity, user);
+		return "redirect:/index/product_list";
+	}
+	
 	
 	// cart controller
+	@Autowired
+	CouponService couponService;
+	
 	@GetMapping("/cart")
-	public String cartUser() {
+	public String cartUser(Model model, @RequestParam("couponName") Optional<String> couponName) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getAuthUser(auth);
+		Coupon coupon = couponService.findCoupon(couponName);
+		double total = 0;
+		List<CartItems> cartItems = cartItemService.index(user);
+		
+		if (cartItems.isEmpty()) {
+			model.addAttribute("cartItem", "NoData");
+		} else {
+			total = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
+					.mapToDouble(num -> num.doubleValue()).sum();
+			model.addAttribute("cartItem", cartItems);
+		}
+		
+		if (coupon == null && couponName.isPresent()) {
+			model.addAttribute("message", "Invalid coupon code");
+		}else if (coupon != null) {
+			LocalDate couponEndDate = coupon.getEvent().getEndDate().toLocalDate();
+			if(couponEndDate.isBefore(LocalDate.now())) {
+				model.addAttribute("message", "Coupon already expired!");
+			}else {
+				double couponDiscount = coupon.getDiscount();
+				List<CartItems> qualifiedProduct = cartItems.stream()
+						.filter(it -> it.getProduct().getCategory().equals(coupon.getCategory()))
+						.collect(Collectors.toList());
+				double totalOfQualifiedProduct = qualifiedProduct.stream()
+						.map(item -> item.getProduct().getPrice() * item.getQuantity())
+						.mapToDouble(num -> num.doubleValue()).sum() * (couponDiscount / DISCOUNT_DIVIDER);
+				total -= totalOfQualifiedProduct;
+			}
+		}
+		
+		model.addAttribute("total", total);
 		return "/User/cart";
 	}
+	
+	@GetMapping("/cart_minus/{id}")
+	public String updateMinusCart(@PathVariable Integer id) {
+		CartItems cartItem = cartItemService.show(id);
+		int total = cartItem.getQuantity() - 1;
+		if(total<=1) {
+			total = 1;
+		}
+		cartItem.setQuantity(total);
+		cartItemService.save(cartItem);
+		return "redirect:/cart";
+	}
+	
+	@GetMapping("/cart_add/{id}")
+	public String updateAddCart(@PathVariable Integer id) {
+		CartItems cartItem = cartItemService.show(id);
+		int total = cartItem.getQuantity() + 1;
+		cartItem.setQuantity(total);
+		cartItemService.save(cartItem);
+		return "redirect:/cart";
+	}
 
+	@GetMapping("/delete_cart_item")
+	public String delete(Integer id) {
+		cartItemService.delete(id);
+		return "redirect:/cart";
+	}
+
+	
+	// for contact link
+	@GetMapping("/contact")
+	public String showContact() {
+		return "/User/contact";
+	}
+	// for about link
+	@GetMapping("/About")
+	public String showAbout() {
+		return "/User/About";
+	}
 }
