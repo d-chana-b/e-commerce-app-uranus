@@ -152,7 +152,7 @@ public class UserController {
 					.mapToDouble(num -> num.doubleValue()).sum();
 			model.addAttribute("cartItem", cartItems);
 		}
-		/*
+		
 		if (coupon == null && couponName.isPresent()) {
 			model.addAttribute("message", "Invalid coupon code");
 		}else if (coupon != null) {
@@ -170,7 +170,7 @@ public class UserController {
 				total -= totalOfQualifiedProduct;
 			}
 		}
-		*/
+		
 		model.addAttribute("total", total);
 		return "/User/cart";
 	}
