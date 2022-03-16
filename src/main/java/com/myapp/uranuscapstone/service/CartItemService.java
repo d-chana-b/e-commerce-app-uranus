@@ -28,6 +28,7 @@ public class CartItemService {
 		Integer addedQuantity = quantity;
 		CartItems cartItem = cartItemRepository.findByUserAndProduct(user, product);
 		
+		
 		if(cartItem != null) {
 			addedQuantity = cartItem.getQuantity() + quantity;
 			cartItem.setQuantity(addedQuantity);

@@ -120,11 +120,12 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("/add_to_cart/{id}")
-	public String addToCart(@PathVariable Long id, @RequestParam("quantity") int qty) {
+	public String addToCart(@PathVariable Long id) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Product product = productService.showProductById(id);
 		User user = userService.getAuthUser(auth);
-		cartItemService.addProduct(product, qty, user);
+		int quantity = 1;
+		cartItemService.addProduct(product, quantity, user);
 		return "redirect:/index/product_list";
 	}
 	
@@ -140,6 +141,33 @@ public class UserController {
 		
 		model.addAttribute("cartItem",cartItems);
 		return "/User/cart";
+	}
+	
+	@GetMapping("/cart_minus/{id}")
+	public String updateMinusCart(@PathVariable Integer id) {
+		CartItems cartItem = cartItemService.show(id);
+		int total = cartItem.getQuantity() - 1;
+		if(total<=1) {
+			total = 1;
+		}
+		cartItem.setQuantity(total);
+		cartItemService.save(cartItem);
+		return "redirect:/cart";
+	}
+	
+	@GetMapping("/cart_add/{id}")
+	public String updateAddCart(@PathVariable Integer id) {
+		CartItems cartItem = cartItemService.show(id);
+		int total = cartItem.getQuantity() + 1;
+		cartItem.setQuantity(total);
+		cartItemService.save(cartItem);
+		return "redirect:/cart";
+	}
+
+	@GetMapping("/destroy_cart_item")
+	public String delete(Integer id) {
+		cartItemService.delete(id);
+		return "redirect:/cart";
 	}
 
 }
