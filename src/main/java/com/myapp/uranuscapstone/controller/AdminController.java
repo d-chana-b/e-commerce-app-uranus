@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myapp.uranuscapstone.dto.CouponDTO;
 import com.myapp.uranuscapstone.model.Category;
 import com.myapp.uranuscapstone.model.Coupon;
 
@@ -182,6 +183,7 @@ public class AdminController {
 		
 		@GetMapping("/admin/coupon")
 		public String listCoupon(Model model) {
+			
 			model.addAttribute("coupons", couponService.getAllCoupon());
 			return "/Admin/coupon";
 		}
@@ -191,13 +193,13 @@ public class AdminController {
 			// create coupon
 			model.addAttribute("coupon", new Coupon());
 			model.addAttribute("event", eventService.getAllEvent());
+			model.addAttribute("category", categoryService.getAllCategory());
 			return "/Admin/addcoupon";  
 			}
 	
 		@PostMapping("/admin/coupon/add")
 		public String saveCoupon(Coupon coupon) {
 		
-				
 				couponService.saveCoupon(coupon);
 			
 				return "redirect:/admin/coupon";
@@ -206,6 +208,7 @@ public class AdminController {
 		@GetMapping("admin/updatecoupon/{id}")
 		public String updateCoupon(@PathVariable int id, Model model) {
 			model.addAttribute("event", eventService.getAllEvent());
+			model.addAttribute("category", categoryService.getAllCategory());
 			Optional<Coupon> coupon = couponService.getCouponById(id);
 			
 			
