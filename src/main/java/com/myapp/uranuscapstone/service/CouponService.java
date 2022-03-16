@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import com.myapp.uranuscapstone.model.Coupon;
 
 import com.myapp.uranuscapstone.repository.CouponRepository;
+
 @Service
 public class CouponService {
 
 	@Autowired
 	CouponRepository couponRepository;
-	
+
 	public List<Coupon> getAllCoupon() {
 		return couponRepository.findAll();
 	}
@@ -31,11 +32,11 @@ public class CouponService {
 		return couponRepository.save(coupon);
 	}
 
-	
 	public void deleteCouponById(Long id) {
-		couponRepository.deleteById(id);	
-	}
-	
-	
+		couponRepository.deleteById(id);
 	}
 
+	public Coupon findCoupon(Optional<String> couponName) {
+		return couponRepository.findByCouponName(couponName);
+	}
+}

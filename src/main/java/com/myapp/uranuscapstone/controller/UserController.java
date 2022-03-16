@@ -1,6 +1,9 @@
 package com.myapp.uranuscapstone.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,21 +17,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.myapp.uranuscapstone.model.Cart;
 import com.myapp.uranuscapstone.model.CartItems;
+import com.myapp.uranuscapstone.model.Coupon;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.User;
-import com.myapp.uranuscapstone.repository.CartRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
 import com.myapp.uranuscapstone.service.CartItemService;
 import com.myapp.uranuscapstone.service.CategoryService;
+import com.myapp.uranuscapstone.service.CouponService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
 import com.myapp.uranuscapstone.service.UserService;
 
 @Controller
 public class UserController {
+	
+	private final int DISCOUNT_DIVIDER = 100; // for cart items diveder
 
 	@Autowired
 	UserRepository userRepo;
@@ -36,8 +41,6 @@ public class UserController {
 	@Autowired
 	CategoryService categoryService;
 
-	@Autowired
-	CartRepository cartRepo;
 
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
@@ -131,15 +134,44 @@ public class UserController {
 	
 	
 	// cart controller
+	@Autowired
+	CouponService couponService;
 	
 	@GetMapping("/cart")
-	public String cartUser(Model model) {
+	public String cartUser(Model model, @RequestParam("couponName") Optional<String> couponName) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.getAuthUser(auth);
-		
+		Coupon coupon = couponService.findCoupon(couponName);
+		double total = 0;
 		List<CartItems> cartItems = cartItemService.index(user);
 		
-		model.addAttribute("cartItem",cartItems);
+		if (cartItems.isEmpty()) {
+			model.addAttribute("cartItem", "NoData");
+		} else {
+			total = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
+					.mapToDouble(num -> num.doubleValue()).sum();
+			model.addAttribute("cartItem", cartItems);
+		}
+		/*
+		if (coupon == null && couponName.isPresent()) {
+			model.addAttribute("message", "Invalid coupon code");
+		}else if (coupon != null) {
+			LocalDate couponEndDate = coupon.getEvent().getEndDate().toLocalDate();
+			if(couponEndDate.isBefore(LocalDate.now())) {
+				model.addAttribute("message", "Coupon already expired!");
+			}else {
+				double couponDiscount = coupon.getDiscount();
+				List<CartItems> qualifiedProduct = cartItems.stream()
+						.filter(it -> it.getProduct().getCategory().equals(coupon.getCategory()))
+						.collect(Collectors.toList());
+				double totalOfQualifiedProduct = qualifiedProduct.stream()
+						.map(item -> item.getProduct().getPrice() * item.getQuantity())
+						.mapToDouble(num -> num.doubleValue()).sum() * (couponDiscount / DISCOUNT_DIVIDER);
+				total -= totalOfQualifiedProduct;
+			}
+		}
+		*/
+		model.addAttribute("total", total);
 		return "/User/cart";
 	}
 	
@@ -164,7 +196,7 @@ public class UserController {
 		return "redirect:/cart";
 	}
 
-	@GetMapping("/destroy_cart_item")
+	@GetMapping("/delete_cart_item")
 	public String delete(Integer id) {
 		cartItemService.delete(id);
 		return "redirect:/cart";

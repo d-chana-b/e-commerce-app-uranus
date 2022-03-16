@@ -1,5 +1,5 @@
 package com.myapp.uranuscapstone.model;
-
+/*
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,3 +52,4 @@ public class Cart {
 	}
 
 }
+*/

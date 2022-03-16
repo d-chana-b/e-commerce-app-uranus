@@ -28,8 +28,6 @@ public class CartItems {
 	private Product product;
 		
 	private int quantity;
-	
-	private double totalPrice;
 
 	public CartItems() {
 		super();
@@ -76,13 +74,6 @@ public class CartItems {
 		this.quantity = quantity;
 	}
 	
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
 	
 
 }
