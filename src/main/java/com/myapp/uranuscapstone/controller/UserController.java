@@ -142,4 +142,15 @@ public class UserController {
 		return "/User/cart";
 	}
 
+	
+	// for contact link
+	@GetMapping("/contact")
+	public String showContact() {
+		return "/User/contact";
+	}
+	// for about link
+	@GetMapping("/About")
+	public String showAbout() {
+		return "/User/About";
+	}
 }
