@@ -1,5 +1,6 @@
 package com.myapp.uranuscapstone.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -16,16 +17,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myapp.uranuscapstone.model.CartItems;
 import com.myapp.uranuscapstone.model.Coupon;
+import com.myapp.uranuscapstone.model.OrderDetail;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.User;
+import com.myapp.uranuscapstone.repository.OrderDetailRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
 import com.myapp.uranuscapstone.service.CartItemService;
 import com.myapp.uranuscapstone.service.CategoryService;
 import com.myapp.uranuscapstone.service.CouponService;
+import com.myapp.uranuscapstone.service.OrderDetailService;
 //import com.myapp.uranuscapstone.service.CustomProductService;
 import com.myapp.uranuscapstone.service.ProductService;
 import com.myapp.uranuscapstone.service.UserService;
@@ -201,7 +206,56 @@ public class UserController {
 		cartItemService.delete(id);
 		return "redirect:/cart";
 	}
-
+	@Autowired
+	OrderDetailRepository orderDetailRepo;
+	
+	@Autowired
+	OrderDetailService orderDetailService;
+	
+	//check out
+	//getmapping muna, i post ko na lang later
+	@GetMapping("/checkout")
+	public String showCheckout(Model model){
+		//Optional<OrderDetail> orderDetails = orderDetailService.getOrderDetailsById(id);
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User userDetails = userService.getAuthUser(auth);
+		double total = 0;
+		List<CartItems> cartItems = cartItemService.index(userDetails);
+		if (cartItems.isEmpty()) {
+			model.addAttribute("cartItem", "NoData");
+		} else {
+			total = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
+					.mapToDouble(num -> num.doubleValue()).sum();
+			model.addAttribute("cartItem", cartItems);
+		}
+		model.addAttribute("cartItem",cartItems);
+		model.addAttribute("total",total);
+		//gawa ka na lang ng if else statement later		
+		model.addAttribute("user",userDetails);
+		return "/User/checkout";		
+	}
+	
+	
+	
+	@PostMapping("/checkout")
+	public String checkout(@RequestParam("totalAmount") Double totalAmount, RedirectAttributes attributes) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Date orderDate = Date.valueOf(LocalDate.now());
+		//Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
+		User user = userService.getAuthUser(auth);
+		//List<CartItems> cartItems = cartItemService.index(user, "IC");
+		//cartItems.forEach(it->it.setStatus("CO"));
+		OrderDetail order = new OrderDetail();
+		order.setUser(user);
+		order.setTotalAmount(totalAmount);
+		order.setOrderDate(orderDate);
+		//order.setDeliveryDate(deliveryDate);
+		orderDetailRepo.save(order);
+		//cartItemService.saveAll(cartItems);
+		//attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); //redirect attribute para sa mga e
+		return "redirect:/cart";
+	}
+	
 	
 	// for contact link
 	@GetMapping("/contact")
