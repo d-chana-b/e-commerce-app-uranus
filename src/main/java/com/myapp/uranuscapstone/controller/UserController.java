@@ -93,8 +93,13 @@ public class UserController {
 
 	@GetMapping("/test")
 	public String testPage() {
-		return "/User/productDetails";
+		return "/User/homepage";
 	}
+	
+	//@GetMapping("/test")
+	//public String testPage() {
+	//	return "/User/productDetails";
+	//}
 
 	@GetMapping("/index/product/{id}")
 	public String categorylist(@PathVariable(value = "id") String id, Model model) {
