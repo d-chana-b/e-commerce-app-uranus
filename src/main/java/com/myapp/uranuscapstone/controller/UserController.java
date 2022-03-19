@@ -213,7 +213,6 @@ public class UserController {
 	OrderDetailService orderDetailService;
 	
 	//check out
-	//getmapping muna, i post ko na lang later
 	@GetMapping("/checkout")
 	public String showCheckout(Model model){
 		//Optional<OrderDetail> orderDetails = orderDetailService.getOrderDetailsById(id);
@@ -255,6 +254,22 @@ public class UserController {
 		//attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); //redirect attribute para sa mga e
 		return "redirect:/cart";
 	}
+	
+	
+	//order details
+	@GetMapping("/order_details")
+	public String orderDetails(Model model) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getAuthUser(auth);
+		List<OrderDetail> orderDetail = orderDetailService.index(user);
+		List<CartItems> cartItem = cartItemService.index(user);
+		model.addAttribute("user",user);//for displaying the name of the user
+		model.addAttribute("cartItem",cartItem);//displaying the purchased product
+		model.addAttribute("orderDetails", orderDetail);
+		return "/User/orderplaced";
+	}
+	
+	
 	
 	
 	// for contact link
