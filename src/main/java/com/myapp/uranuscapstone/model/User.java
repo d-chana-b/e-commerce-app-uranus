@@ -16,22 +16,46 @@ public class User {
 	@Column(name="user_id")
     private int userId;
      
-    //@Column(nullable = false, unique = true, length = 45)
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
      
-    //@Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 64)
     private String password;
 
-	//@Column(name = "first_name", nullable = false, length = 20)
+	@Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
      
-    //@Column(name = "last_name", nullable = false, length = 20)
+    @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
+    
+    
+    private String address;
+	@Column(name = "phone_number", length = 38)
+	private Long phoneNumber;
+    
+    
+    
     
     //@OneToOne(mappedBy = "users")
     //private Cart cart;
     
-    public User() {
+    public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(Long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public User() {
     	
     }
     
