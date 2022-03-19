@@ -88,7 +88,7 @@ public class UserController {
 
 	@GetMapping("/test")
 	public String testPage() {
-		return "/User/productDetails";
+		return "/User/homepage";
 	}
 
 	@GetMapping("/index/product/{id}")
