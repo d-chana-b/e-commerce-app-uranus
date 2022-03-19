@@ -1,12 +1,9 @@
 package com.myapp.uranuscapstone.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.List;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "users")
@@ -33,14 +30,71 @@ public class User {
 	@Column(name = "phone_number", length = 38)
 	private Long phoneNumber;
     
-    
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<CartItems> cartItems;
+	
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "user_role",
+			joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "user_id")},
+					inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "role_id")}
+			
+			)
+	private List<Role> roles;
     
     
     //@OneToOne(mappedBy = "users")
     //private Cart cart;
-    
+	
+	
+	public User(int userId, String firstName, String lastName,
+			@NotEmpty @Email(message = "{errors.invalid_email}") String email, @NotEmpty String password,
+			String address, Long phoneNumber, List<Role> roles) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.roles = roles;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(User user) {
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.email = user.getLastName();
+		this.password = user.getPassword();
+		this.address =  user.getAddress();
+		this.phoneNumber = user.getPhoneNumber();
+		this.roles = user.getRoles();
+	}
+	
+	
     public String getAddress() {
 		return address;
+	}
+
+	public List<CartItems> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItems> cartItems) {
+		this.cartItems = cartItems;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public void setAddress(String address) {
@@ -53,19 +107,6 @@ public class User {
 
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public User() {
-    	
-    }
-    
-    public User(int id, String email, String password, String firstName, String lastName) {
-		super();
-		this.userId = id;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
 	}
 
 	public int getUserId() {

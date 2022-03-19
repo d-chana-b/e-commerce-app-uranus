@@ -23,6 +23,9 @@ import com.myapp.uranuscapstone.service.CustomUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	CustomUserDetailsService customUserDetailService;
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -43,28 +46,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return authProvider;
 	}
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticationProvider());
-	}
+	/*
+	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
+	 * Exception { auth.authenticationProvider(authenticationProvider()); }
+	 */
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-        .antMatchers("/index").authenticated()
-        .anyRequest().permitAll()
-        .and()
-        .formLogin()
-            .usernameParameter("email")
-            .defaultSuccessUrl("/index")
-            .permitAll()
-        .and()
-        .logout().logoutSuccessUrl("/").permitAll();
+		/*
+		 * http.authorizeRequests() .antMatchers("/index").authenticated()
+		 * .anyRequest().permitAll() .and() .formLogin() .usernameParameter("email")
+		 * .defaultSuccessUrl("/index") .permitAll() .and()
+		 * .logout().logoutSuccessUrl("/").permitAll();
+		 */
+		http.authorizeRequests().antMatchers("/index", "/register", "/css/**","/image/**","/product-photos/**","/userImage/**").permitAll()
+				.antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll().failureUrl("/login?error=true").defaultSuccessUrl("/index", true)
+				.usernameParameter("email").passwordParameter("password").and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/sign-out")).logoutSuccessUrl("/login")
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().exceptionHandling().and().csrf()
+				.disable();
+		http.headers().frameOptions().disable();
 
 	}
-	
+
 	// galing sa gawa ni raymond
-/*
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailService);
@@ -76,5 +83,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/images/**", "/product-photos/**", "css/**",
 				"/js/**", "/img/**");
 	}
-*/
+
 }
