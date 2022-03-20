@@ -4,9 +4,9 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 body {
-    background: url('/image/background.jpg') no-repeat;
+    background: lightgray;
     background-size: cover;
-    color: white;
+    color: black;
 }
 .regform {
     position: absolute;
@@ -34,16 +34,24 @@ body {
     outline: none;
 }
 .regform button {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10 auto;
-    padding: 10px 15px;
-    width: 50%;
-    border: 0;
-    display: block;
-    align-items: center;
-    border-radius: 50px;
-    background-color: white;
+    padding: 5px 10px;
+  	font-size: 20px;
+  	text-align: center;
+  	cursor: pointer;
+  	outline: none;
+  	color: #fff;
+  	background-color: #04AA6D;
+  	border: none;
+  	border-radius: 15px;
+  	box-shadow: 0 9px #999;
+}
+.regform button:hover {
+	background-color: #3e8e41;
+}
+.regform button:active {
+  	background-color: #3e8e41;
+  	box-shadow: 0 5px #666;
+  	transform: translateY(4px);
 }
 .gotologin{
     text-align: center;
@@ -74,16 +82,24 @@ body {
     outline: none;
 }
 .loginform button {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10 auto;
-    padding: 10px 15px;
-    width: 50%;
-    border: 0;
-    display: block;
-    align-items: center;
-    border-radius: 50px;
-    background-color: white;
+    padding: 5px 10px;
+  	font-size: 20px;
+  	text-align: center;
+  	cursor: pointer;
+  	outline: none;
+  	color: #fff;
+  	background-color: #04AA6D;
+  	border: none;
+  	border-radius: 15px;
+  	box-shadow: 0 9px #999;
+}
+.loginform button:hover {
+	background-color: #3e8e41
+}
+.loginform button:active {
+  	background-color: #3e8e41;
+  	box-shadow: 0 5px #666;
+  	transform: translateY(4px);
 }
 .homepage {
     position: absolute;
