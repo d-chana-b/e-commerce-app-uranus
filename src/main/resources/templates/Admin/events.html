@@ -101,9 +101,9 @@
 				
 
 						<td><a th:href="@{/admin/deleteevent/{id}(id=${event.id})}"
-							class="btn btn-danger">Delete</a></td>
-						<td><a th:href="@{/admin/updateevent/{id}(id=${event.id})}"
-							class="btn btn-warning">Update</a></td>
+							class="btn btn-danger btn-sm"  onclick="return confirm('Are you you want to delete this event?')">Delete</a>
+						<a th:href="@{/admin/updateevent/{id}(id=${event.id})}"
+							class="btn btn-warning btn-sm">Update</a></td>
 					</tr>
 				</tbody>
 			</table>
