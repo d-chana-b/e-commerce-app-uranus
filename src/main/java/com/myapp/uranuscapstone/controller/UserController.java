@@ -88,7 +88,7 @@ public class UserController {
 		userRepo.save(user);
 		request.login(user.getEmail(), password);
 		//return "/User/register_success";
-		return "redirect:/test"; //homepage
+		return "redirect:/"; //homepage
 	}
 
 	////// INDEX SESSION
@@ -105,10 +105,9 @@ public class UserController {
 		return "/User/index";
 	}
 	
-	@GetMapping("/index")
-	public String userPage() {
-		return "/User/userIndex";
-	}
+	/*
+	 * @GetMapping("/index") public String userPage() { return "/User/userIndex"; }
+	 */
 
 	@GetMapping("/index/product_list")
 	public String listProduct(Model model) {

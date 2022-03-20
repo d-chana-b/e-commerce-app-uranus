@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/*
 	 * @Autowired private DataSource dataSource;
 	 */
-	
+
 	@Autowired
 	CustomUserDetailsService customUserDetailService;
 
@@ -60,9 +60,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * .defaultSuccessUrl("/index") .permitAll() .and()
 		 * .logout().logoutSuccessUrl("/").permitAll();
 		 */
-		http.authorizeRequests().antMatchers("/", "/register","/contact", "/About","/index/product_list","/css/**","/image/**","/product-photos/**","/userImage/**").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll().failureUrl("/login?error=true").defaultSuccessUrl("/index", true)
+		http.authorizeRequests()
+				.antMatchers("/", "/register", "/contact", "/About", "/index/product_list", "/css/**", "/image/**",
+						"/product-photos/**", "/userImage/**")
+				.permitAll().antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll().failureUrl("/login?error=true").defaultSuccessUrl("/", true)
 				.usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/sign-out")).logoutSuccessUrl("/login")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().exceptionHandling().and().csrf()
