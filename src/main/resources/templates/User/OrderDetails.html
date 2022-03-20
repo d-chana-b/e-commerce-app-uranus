@@ -13,6 +13,33 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 </head> 
+<body>
+	<!-- Nav Bar-->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<span class="navbar-brand mb-0 h1">  <img src="/image/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+            Dripin Kicks
+		</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-link active" th:ref="@{/}">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" th:href="@{/contact}">Contact</a> <a class="nav-link"
+					th:href="@{/About}">About</a>
+			</div>
+			<div class="navbar-nav ml-auto">
+				<a class="nav-link" th:href="@{/admin}"><i class='fas fa-user-alt'></i>Your
+					Account</a> <a class="nav-link" th:href="@{/login}"><i
+					class='fas fa-sign-out-alt'></i>Logout</a>
+			</div>
+		</div>
+	</nav>
+    
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
