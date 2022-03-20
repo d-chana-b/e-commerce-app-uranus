@@ -62,8 +62,17 @@
 .fleximage {
 	width: 100px;
 }
+img{
+float: right;
+}
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 50px;
+  border-radius: 25px;
+}
 </style>
-<title>Welcome Home</title>
+<title>Product Details</title>
 </head>
 <body>
 	<!-- Nav Bar-->
@@ -109,24 +118,24 @@
 
 		<div class="productImage" th:each="product, iStat : ${products}">
 
-			<img align="right" th:src="@{${'/product-photos/' + product.productImageName}}">
+			<img th:src="@{${'/product-photos/' + product.productImageName}}" style="width: 600px;height: 300px; margin-right: 150px;">
 			<br clear="left"/>
 			<div class="productDetails">
 			<form th:action="@{/add_to_cart/{id}(id = ${product.productId})}"
 				method="POST">
-				<p>Product Name</p>
-				<h4 th:text="${product.productName}"></h4>
+				<p style="font-family:Verdana, sans-serif; color:Black; font-size: 25px;">Product Name:</p>
+				<h4 style="color: gray" th:text="${product.productName}"></h4>
 				
-				<p>Category:</p>
-				<h5 th:text="${product.category.getName()}"></h5>
+				<p style="font-family:Verdana, sans-serif; color:Black; font-size: 25px;">Category:</p>
+				<h4 style="color: gray" th:text="${product.category.getName()}"></h4>
 				
-				<p>Price:</p>
-				<h6 th:text="${product.price}"></h6>
+				<p style="font-family:Verdana, sans-serif; color:Black; font-size: 25px;">Price:</p>
+				<h4 style="color: gray" th:text="${product.price}"></h4>
 				<div>
-				<label>Quantity:</label>
+				<p style="font-family:Verdana, sans-serif; color:Black; font-size: 25px;">Quantity:</p>
 					<input type="hidden" value="1" name="quantity" id="quantity">
-				</div>
-				<button type="submit" class="primary-btn">add to cart</button>
+				</div><br><br>
+				<button type="submit" class="primary-btn">Add to Cart</button>
 			</form>
 		</div>
 		</div>
