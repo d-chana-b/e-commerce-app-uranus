@@ -182,13 +182,17 @@ public class UserController {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.getAuthUser(auth);
 		Coupon coupon = couponService.findCoupon(couponName);
+		String applyCoupon = "";
 		double total = 0;
+		double subTotal = 0;
 		List<CartItems> cartItems = cartItemService.index(user);
 
 		if (cartItems.isEmpty()) {
 			model.addAttribute("cartItem", "NoData");
 		} else {
 			total = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
+					.mapToDouble(num -> num.doubleValue()).sum();
+			subTotal = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
 					.mapToDouble(num -> num.doubleValue()).sum();
 			model.addAttribute("cartItem", cartItems);
 		}
@@ -207,10 +211,16 @@ public class UserController {
 				double totalOfQualifiedProduct = qualifiedProduct.stream()
 						.map(item -> item.getProduct().getPrice() * item.getQuantity())
 						.mapToDouble(num -> num.doubleValue()).sum() * (couponDiscount / DISCOUNT_DIVIDER);
+				model.addAttribute("success", (int)couponDiscount + "% on all " + coupon.getCategory().getName()+".");
+				applyCoupon = coupon.getCouponName();
 				total -= totalOfQualifiedProduct;
 			}
 		}
-
+		int cartSize = cartItems.size();
+		
+		model.addAttribute("couponApply",applyCoupon);
+		model.addAttribute("cartSize",cartSize);
+		model.addAttribute("subTotal",subTotal);
 		model.addAttribute("total", total);
 		return "/User/cart";
 	}
@@ -249,6 +259,76 @@ public class UserController {
 	OrderDetailService orderDetailService;
 
 	// check out
+	@GetMapping("/checkout/{id}")
+	public String showCheckout(Model model,@PathVariable String id) {
+		// Optional<OrderDetail> orderDetails =
+		// orderDetailService.getOrderDetailsById(id);
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User userDetails = userService.getAuthUser(auth);
+		Optional<String> couponName = Optional.ofNullable(id);
+		Coupon coupon = couponService.findCoupon(couponName);
+		double total = 0;
+		List<CartItems> cartItems = cartItemService.index(userDetails);
+		if (cartItems.isEmpty()) {
+			model.addAttribute("cartItem", "NoData");
+		} else {
+			total = cartItems.stream().map(item -> item.getProduct().getPrice() * item.getQuantity())
+					.mapToDouble(num -> num.doubleValue()).sum();
+			model.addAttribute("cartItem", cartItems);
+		}
+		
+		if (coupon == null && couponName.isPresent()) {
+			model.addAttribute("message", "Invalid coupon code");
+		} else if (coupon != null) {
+			LocalDate couponEndDate = coupon.getEvent().getEndDate().toLocalDate();
+			if (couponEndDate.isBefore(LocalDate.now())) {
+				model.addAttribute("message", "Coupon already expired!");
+			} else {
+				double couponDiscount = coupon.getDiscount();
+				List<CartItems> qualifiedProduct = cartItems.stream()
+						.filter(it -> it.getProduct().getCategory().equals(coupon.getCategory()))
+						.collect(Collectors.toList());
+				double totalOfQualifiedProduct = qualifiedProduct.stream()
+						.map(item -> item.getProduct().getPrice() * item.getQuantity())
+						.mapToDouble(num -> num.doubleValue()).sum() * (couponDiscount / DISCOUNT_DIVIDER);
+				model.addAttribute("success", (int)couponDiscount + "% on all " + coupon.getCategory().getName()+".");
+				//applyCoupon = coupon.getCouponName();
+				total -= totalOfQualifiedProduct;
+			}
+		}
+		model.addAttribute("couponApply",id);
+		int cartSize = cartItems.size();
+		model.addAttribute("cartSize",cartSize);
+		model.addAttribute("cartItem", cartItems);
+		model.addAttribute("total", total);
+		// gawa ka na lang ng if else statement later
+		model.addAttribute("user", userDetails);
+		return "/User/checkout";
+	}
+
+	@PostMapping("/checkout/{id}")
+	public String checkout(@RequestParam("totalAmount") Double totalAmount,@PathVariable String id, RedirectAttributes attributes) {
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Date orderDate = Date.valueOf(LocalDate.now());
+		// Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
+		User user = userService.getAuthUser(auth);
+		// List<CartItems> cartItems = cartItemService.index(user, "IC");
+		// cartItems.forEach(it->it.setStatus("CO"));
+		OrderDetail order = new OrderDetail();
+		order.setUser(user);
+		order.setTotalAmount(totalAmount);
+		order.setOrderDate(orderDate);
+		// order.setDeliveryDate(deliveryDate);
+		orderDetailRepo.save(order);
+		// cartItemService.saveAll(cartItems);
+
+		
+		attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); // redirect attribute para sa mga e
+		return "redirect:/cart";
+	}
+	
+	
+	//checkout if no coupon apply
 	@GetMapping("/checkout")
 	public String showCheckout(Model model) {
 		// Optional<OrderDetail> orderDetails =
@@ -264,13 +344,15 @@ public class UserController {
 					.mapToDouble(num -> num.doubleValue()).sum();
 			model.addAttribute("cartItem", cartItems);
 		}
+		int cartSize = cartItems.size();
+		model.addAttribute("cartSize",cartSize);
 		model.addAttribute("cartItem", cartItems);
 		model.addAttribute("total", total);
 		// gawa ka na lang ng if else statement later
 		model.addAttribute("user", userDetails);
 		return "/User/checkout";
 	}
-
+	
 	@PostMapping("/checkout")
 	public String checkout(@RequestParam("totalAmount") Double totalAmount, RedirectAttributes attributes) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -291,6 +373,7 @@ public class UserController {
 		attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); // redirect attribute para sa mga e
 		return "redirect:/cart";
 	}
+	
 
 	// order details
 	@GetMapping("/order_details")
@@ -302,7 +385,7 @@ public class UserController {
 		model.addAttribute("user", user);// for displaying the name of the user
 		model.addAttribute("cartItem", cartItem);// displaying the purchased product
 		model.addAttribute("orderDetails", orderDetail);
-		return "/User/orderplaced";
+		return "/User/OrderDetails";
 	}
 
 	// for contact link

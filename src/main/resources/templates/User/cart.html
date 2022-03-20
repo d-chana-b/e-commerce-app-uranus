@@ -44,8 +44,7 @@
 								<b>Shopping Cart</b>
 							</h4>
 						</div>
-						<div class="col align-self-center text-right text-muted">3
-							items</div>
+						<div class="col align-self-center text-right text-muted" th:text="${cartSize}+' item(s)'"></div>
 					</div>
 				</div>
 				<div class="row border-top border-bottom"
@@ -90,7 +89,7 @@
 				<div class="row">
 					<div class="col">Subtotal</div>
 					<div class="col text-right">
-						Total <span th:text="${total} ? ${'P ' + total} : 'P 00.00'"></span>
+						Total <span th:text="${subTotal} ? ${'P ' + subTotal} : 'P 00.00'"></span>
 					</div>
 				</div>
 				<form th:action="@{/cart}">
@@ -99,14 +98,17 @@
 					<input id="code" placeholder="Enter your code" name="couponName">
 					<button type="submit">Apply</button>
 				</form>
+				<p style="color: #FF5050;" th:if="${success}">Coupon applied: <span th:text="${success}"></span></p>
 				<p style="color: #FF5050;" th:text="${message}"></p>
 
 				<div class="row"
 					style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
 					<div class="col">TOTAL PRICE</div>
-					<div class="col text-right">₱ 137.00</div>
+					<div class="col text-right" th:text="${total} ? ${'P ' + total} : 'P 00.00'"></div>
 				</div>
-				<a class="cbtn" th:href="@{/checkout}" role="button">CHECKOUT</a>
+				<span th:if="${couponApply != null}"><a class="cbtn" th:href="@{/checkout/{id}(id=${couponApply})}" role="button">CHECKOUT</a></span>
+				<span th:unless="${couponApply != null}"><a class="cbtn" th:href="@{/checkout}" role="button">CHECKOUT</a></span>
+				
 			</div>
 		</div>
 	</div>
