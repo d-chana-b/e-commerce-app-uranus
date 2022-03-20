@@ -6,23 +6,26 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.myapp.uranuscapstone.model.User;
 
-public class CustomUserDetails implements UserDetails {
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+
+
+public class CustomUserDetails extends User implements UserDetails {
 	
 	private User user;
 	
 	public CustomUserDetails(User user) {
-		super();
+		super(user);
 		this.user = user;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorityList = new ArrayList<>();
-		user.getRoles().forEach(role->{
+		super.getRoles().forEach(role->{
 			authorityList.add(new SimpleGrantedAuthority(role.getRoleName()));
 		});
 		return authorityList;
@@ -31,13 +34,13 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return user.getPassword();
+		return super.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return user.getEmail();
+		return super.getEmail();
 	}
 
 	@Override

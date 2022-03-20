@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,19 +69,26 @@ public class UserController {
 	@Autowired
 	RoleService roleService;
 
-	@PostMapping("/process_register")
-	public String processRegister(User user,HttpServletRequest request)throws ServletException {
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@PostMapping("/register")
+	public String processRegister(@ModelAttribute("user") User user,HttpServletRequest request)throws ServletException {
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
+		/*
+		 * BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); String
+		 * encodedPassword = passwordEncoder.encode(user.getPassword());
+		 * user.setPassword(encodedPassword);
+		 */
 
+		String password = user.getPassword();
+		user.setPassword(bCryptPasswordEncoder.encode(password));
 		List<Role> roles = new ArrayList<>();
-		roles.add(roleService.show((long) 1));
+		roles.add(roleService.show((long) 2));
 		user.setRoles(roles);
 		userRepo.save(user);
-		request.login(user.getEmail(), user.getPassword());
-		return "/User/register_success";
+		request.login(user.getEmail(), password);
+		//return "/User/register_success";
+		return "redirect:/test"; //homepage
 	}
 
 	////// INDEX SESSION
@@ -91,9 +99,15 @@ public class UserController {
 	// @Autowired
 	// private CustomProductService customProductService;
 
+	// landing page of the application
+	@GetMapping("/")
+	public String homePage() {
+		return "/User/index";
+	}
+	
 	@GetMapping("/index")
 	public String userPage() {
-		return "/User/index";
+		return "/User/userIndex";
 	}
 
 	@GetMapping("/index/product_list")

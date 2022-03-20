@@ -21,30 +21,31 @@ import com.myapp.uranuscapstone.service.CustomUserDetailsService;
 @EnableWebSecurity
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private DataSource dataSource;
+	/*
+	 * @Autowired private DataSource dataSource;
+	 */
 	
 	@Autowired
 	CustomUserDetailsService customUserDetailService;
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new CustomUserDetailsService();
-	}
+	/*
+	 * @Bean public UserDetailsService userDetailsService() { return new
+	 * CustomUserDetailsService(); }
+	 */
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
-
-		return authProvider;
-	}
+	/*
+	 * @Bean public DaoAuthenticationProvider authenticationProvider() {
+	 * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	 * authProvider.setUserDetailsService(userDetailsService());
+	 * authProvider.setPasswordEncoder(passwordEncoder());
+	 * 
+	 * return authProvider; }
+	 */
 
 	/*
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
@@ -59,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * .defaultSuccessUrl("/index") .permitAll() .and()
 		 * .logout().logoutSuccessUrl("/").permitAll();
 		 */
-		http.authorizeRequests().antMatchers("/index", "/register", "/css/**","/image/**","/product-photos/**","/userImage/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/register","/contact", "/About","/index/product_list","/css/**","/image/**","/product-photos/**","/userImage/**").permitAll()
 				.antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").permitAll().failureUrl("/login?error=true").defaultSuccessUrl("/index", true)
 				.usernameParameter("email").passwordParameter("password").and().logout()

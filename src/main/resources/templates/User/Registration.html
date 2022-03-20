@@ -8,16 +8,16 @@
     <div class="regform">
      <h1>Sign up here</h1>
       <form class="register-form" id="register-form"
-      			th:action="@{/process_register}" th:object="${user}" method="POST">
+      			th:action="@{/register}" th:object="${user}" method="POST">
         <p>First Name:</p>
-        <input type="text" id="fname" name="firstname" placeholder="First Name" th:field="*{firstName}" required minlength="2" maxlength="20">
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" th:field="*{firstName}" required minlength="2" maxlength="20">
         <p>Last Name:</p>
-        <input type="text" id="lname" name="lastname" placeholder="Last Name" th:field="*{lastName}" required minlength="2" maxlength="20">
+        <input type="text" id="lastname" name="lastname" placeholder="Last Name" th:field="*{lastName}" required minlength="2" maxlength="20">
         <p>Email Address:</p>
-        <input type="email" id="emailadd" name="emailaddress" placeholder="Email Address" th:field="*{email}" required>
+        <input type="email" id="email" name="email" placeholder="Email Address" th:field="*{email}" required>
         <p>Password:</p>
         <input id="password" type="password" placeholder="Password" th:field="*{password}" required minlength="6" maxlength="10">
-         <input type="hidden" th:value="${user.getUserId}">
+        <!--  <input type="hidden" th:value="${user.getUserId}"> -->
         <div id="errorMsg"></div>
         <p><button type="submit">Register</button></p>
         <div class="gotologin">

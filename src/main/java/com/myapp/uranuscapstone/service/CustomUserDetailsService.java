@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 import com.myapp.uranuscapstone.custom.CustomUserDetails;
 import com.myapp.uranuscapstone.model.User;
 import com.myapp.uranuscapstone.repository.UserRepository;
+
 @Service
-public class CustomUserDetailsService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepo;
 
@@ -24,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		 * CustomUserDetails(user);
 		 */
 		Optional<User> user = userRepo.findUserByEmail(email);
-		user.orElseThrow(()-> new UsernameNotFoundException("User not found!"));
+		user.orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 		return user.map(CustomUserDetails::new).get();
 	}
 
