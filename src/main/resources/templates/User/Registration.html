@@ -19,7 +19,8 @@
         <input id="password" type="password" placeholder="Password" th:field="*{password}" required minlength="6" maxlength="10">
         <!--  <input type="hidden" th:value="${user.getUserId}"> -->
         <div id="errorMsg"></div>
-        <p><button type="submit">Register</button></p>
+        <center><p><button type="submit">Register</button></p></center>
+        <br>
         <div class="gotologin">
             <p>Already have an account? <a th:href="@{/login}">Login here.</a></p>
         </div>
