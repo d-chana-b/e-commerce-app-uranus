@@ -81,8 +81,8 @@
 				<a class="nav-link active" th:href="@{/index}">Home <span
 					class="sr-only">(current)</span></a> <a class="nav-link active">Products
 					<span class="sr-only">(current)</span>
-				</a> <a class="nav-link" th:href="@{/contact}">Contact</a> <a class="nav-link"
-					th:href="@{/About}">About us</a>
+				</a> <a class="nav-link" th:href="@{/contact}">Contact</a> <a
+					class="nav-link" th:href="@{/About}">About us</a>
 			</div>
 			<div class="navbar-nav ml-auto">
 				<a class="nav-link" href="#"><i class='fas fa-user-alt'></i>Your
@@ -94,10 +94,15 @@
 		</div>
 	</nav>
 	<br>
-	<br>
-	<br>
 	<!-- START HERE!!!!!-->
-
+	<div class="alert alert-success alert-dismissible fade show"
+		role="alert" th:if="${addItem}">
+		<p th:text="${addItem}" class="text-center"></p>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
 	<!-- the body-->
 	<div class="container">
 
@@ -122,9 +127,10 @@
 					<p th:text="${product.productName}"></p>
 					<!-- 	<h7 th:text="${product.category.getName()}"></h7> -->
 					<h6 th:text="${product.price}"></h6>
-					<a th:href="@{/index/product_details/{id}(id=${product.productId})}"
+					<a
+						th:href="@{/index/product_details/{id}(id=${product.productId})}"
 						class="btn btn-primary">View Details</a>
-					
+
 				</div>
 
 			</div>

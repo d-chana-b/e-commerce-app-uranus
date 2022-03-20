@@ -13,7 +13,7 @@ public class Coupon {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "event", referencedColumnName = "event_id")
@@ -26,11 +26,11 @@ public class Coupon {
 	private String couponName;
 	private long discount;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -66,7 +66,7 @@ public class Coupon {
 		this.category = category;
 	}
 
-	public Coupon(long id, Event event, String couponName, long discount) {
+	public Coupon(Long id, Event event, String couponName, long discount) {
 		super();
 		this.id = id;
 		this.event = event;

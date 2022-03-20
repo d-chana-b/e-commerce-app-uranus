@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.jar.Attributes;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -69,6 +70,7 @@ public class UserController {
 
 	@PostMapping("/process_register")
 	public String processRegister(User user,HttpServletRequest request)throws ServletException {
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
@@ -144,12 +146,13 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/add_to_cart/{id}")
-	public String addToCart(@PathVariable Long id) {
+	public String addToCart(@PathVariable Long id,Model model,RedirectAttributes attributes) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Product product = productService.showProductById(id);
 		User user = userService.getAuthUser(auth);
 		int quantity = 1;
 		cartItemService.addProduct(product, quantity, user);
+		attributes.addFlashAttribute("addItem","Successfully added to the cart!");
 		return "redirect:/index/product_list";
 	}
 
@@ -266,8 +269,9 @@ public class UserController {
 		// order.setDeliveryDate(deliveryDate);
 		orderDetailRepo.save(order);
 		// cartItemService.saveAll(cartItems);
-		// attributes.addFlashAttribute("orderSuccess", "Order successfully placed");
-		// //redirect attribute para sa mga e
+
+		
+		attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); // redirect attribute para sa mga e
 		return "redirect:/cart";
 	}
 

@@ -1,5 +1,8 @@
 package com.myapp.uranuscapstone.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +21,7 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="product_id")
-	private long productId;
+	private Long productId;
 	
     private String productName;
     
@@ -25,6 +29,9 @@ public class Product {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name= "category", referencedColumnName = "category_id")
     private Category category; 
+    
+    @OneToMany (mappedBy="product", cascade=CascadeType.MERGE)
+	private List<CartItems> cartItems;
     
     
     private double price;
@@ -35,7 +42,7 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(long productId, String productName, Category category, double price, String productImageName) {
+	public Product(Long productId, String productName, Category category, double price, String productImageName) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -44,11 +51,11 @@ public class Product {
 		this.productImageName = productImageName;
 	}
 
-	public long getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(long productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
