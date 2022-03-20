@@ -31,6 +31,7 @@ import com.myapp.uranuscapstone.model.OrderDetail;
 import com.myapp.uranuscapstone.model.Product;
 import com.myapp.uranuscapstone.model.Role;
 import com.myapp.uranuscapstone.model.User;
+import com.myapp.uranuscapstone.repository.CouponRepository;
 import com.myapp.uranuscapstone.repository.OrderDetailRepository;
 import com.myapp.uranuscapstone.repository.ProductRepository;
 import com.myapp.uranuscapstone.repository.UserRepository;
@@ -99,9 +100,12 @@ public class UserController {
 	// @Autowired
 	// private CustomProductService customProductService;
 
+
+	
 	// landing page of the application
 	@GetMapping("/")
-	public String homePage() {
+	public String homePage(Model model) {
+		model.addAttribute("couponList",couponService.getAllCoupon());
 		return "/User/index";
 	}
 	
