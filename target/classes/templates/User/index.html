@@ -141,9 +141,11 @@
 		<br>
 		<!--sample lang to, pag gusto nyo ng madami card panel, need muna ipasok sa card group
 		  -->
+		<div class="container">
+		<div class="row"> 
 		<div th:each="item : ${couponList}">
-			<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-				<div class="card-header" th:text="${item.event.eventName}">Announcement</div>
+			<div class="card text-white bg-dark mb-3" style="max-width: 18rem; margin: 10px;">
+				<div class="card-header" th:text="${item.event.eventName}" style="background: lightgray; color: black;">Announcement</div>
 				<div class="card-body">
 					<h5 class="card-title" th:text="'Get Discount in '+${item.category.name}"></h5>
 					<p class="card-text">For a limited time only!! Please copy the
@@ -153,7 +155,8 @@
 				</div>
 			</div>
 		</div>
-
+		</div>
+		</div>
 
 
 	</div>

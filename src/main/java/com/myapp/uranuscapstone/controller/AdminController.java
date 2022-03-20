@@ -47,18 +47,7 @@ public class AdminController {
 	CategoryService categoryService;
 
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/product-photos";
-	/*
-	 * @GetMapping("/admin") public String adminHome() { return "/Admin/adminHome";
-	 * }
-	 * 
-	 * /* @GetMapping("/admin/product") public String adminProduct() { return
-	 * "/Admin/productlist"; }
-	 */
 
-	/*
-	 * @GetMapping("/admin/product/add") public String getProduct() { return
-	 * "/Admin/addproduct"; }
-	 */
 
 	// login page of admin
 	@GetMapping("/loginAdmin")
@@ -89,36 +78,20 @@ public class AdminController {
 
 	@GetMapping("/admin/product/add")
 	public String createProductForm(Model model) {
-		// create student object to hold student form data
+		
 		model.addAttribute("product", new Product());
 		model.addAttribute("category", categoryService.getAllCategory());
 		return "/Admin/addproduct";
 	}
 
-	/*
-	 * @GetMapping("/product/edit/{id}") public String editProductForm(@PathVariable
-	 * Long id, Model model) { model.addAttribute("product",
-	 * productService.getProductById(id)); return "/Admin/addproduct"; }
-	 * 
-	 * 
-	 * /* @PostMapping("/admin/product/add") public String
-	 * saveProduct(@ModelAttribute("product") Product product) {
-	 * productService.saveProduct(product); return "redirect:/admin"; }
-	 */
+	
 
 	@PostMapping("/admin/product/add")
 	public String saveProduct(@ModelAttribute("product") Product product,
 			@RequestParam("productImage") MultipartFile file, @RequestParam("imageName") String imgName,
 			RedirectAttributes attributes) throws IOException {
 
-		/*
-		 * Product existingProduct =new Product();
-		 * existingProduct.setId(product.getId());
-		 * existingProduct.setProductName(product.getProductName());
-		 * existingProduct.setCategory(product.getCategory());
-		 * existingProduct.setPrice(product.getPrice());
-		 * existingProduct.setProductImageName(product.getProductImageName());
-		 */
+	
 
 		String imageUUId;
 		if (!file.isEmpty()) {
@@ -130,8 +103,7 @@ public class AdminController {
 		}
 		product.setProductImageName(imageUUId);
 		productService.saveProduct(product);
-		String message = (product.getProductId() == null) ? "Product successfully added!"
-				: "Product successfully updated!";
+		String message = (product.getProductId() == null) ? "Product successfully updated!" : "Product successfully added!";
 		attributes.addFlashAttribute("message", message);
 		return "redirect:/admin";
 	}
@@ -151,7 +123,7 @@ public class AdminController {
 
 	}
 
-	// handler method to handle delete student request
+
 
 	@GetMapping("admin/delete/{id}")
 	public String deleteProduct(@PathVariable Long id, RedirectAttributes attributes) {
@@ -185,8 +157,12 @@ public class AdminController {
 	public String saveCoupon(Coupon coupon, RedirectAttributes attributes) {
 
 		couponService.saveCoupon(coupon);
-		String message = (coupon.getId()==null) ? "Coupon successfully added!"
-				: "Coupon successfully updated!";
+		
+		  String message = (coupon.getId()==null) ? "Coupon successfully updated!" :
+		  "Coupon successfully added!";
+		 
+	
+		
 		attributes.addFlashAttribute("message", message);
 		return "redirect:/admin/coupon";
 	}
@@ -234,8 +210,8 @@ public class AdminController {
 	public String saveEvent(Event event,RedirectAttributes attributes) {
 
 		eventService.saveEvent(event);
-		String message = (event.getId()==null) ? "Event successfully added!"
-				: "Event successfully updated!";
+		String message = (event.getId()==null) ? "Event successfully updated!"
+				: "Event successfully added!";
 		attributes.addFlashAttribute("message", message);
 		return "redirect:/admin/event";
 	}

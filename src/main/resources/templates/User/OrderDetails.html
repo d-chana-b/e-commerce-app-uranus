@@ -1,0 +1,88 @@
+<div class="container px-1 px-md-4 py-5 mx-auto">
+ <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <link rel="stylesheet" href="OrderDetails.styles.css">  
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+</head> 
+<body>
+	<!-- Nav Bar-->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<span class="navbar-brand mb-0 h1">  <img src="/image/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+            Dripin Kicks
+		</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-link active" th:ref="@{/}">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" th:href="@{/contact}">Contact</a> <a class="nav-link"
+					th:href="@{/About}">About</a>
+			</div>
+			<div class="navbar-nav ml-auto">
+				<a class="nav-link" th:href="@{/admin}"><i class='fas fa-user-alt'></i>Your
+					Account</a> <a class="nav-link" th:href="@{/login}"><i
+					class='fas fa-sign-out-alt'></i>Logout</a>
+			</div>
+		</div>
+	</nav>
+    
+    <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+            <div class="d-flex">
+                <h5>ORDER <span class="text-primary font-weight-bold">#Y1233342</span></h5>
+            </div>
+            <div class="d-flex flex-column text-sm-right">
+                <p class="mb-0">Expected Arrival <span>03/21/22</span></p>
+                <p>Amount To Pay: <span class="font-weight-bold">4500</span></p>
+            </div>
+        </div> <!-- Add class 'active' to progress -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <ul id="progressbar" class="text-center">
+                    <li class="active step0"></li>
+                    <li class="active step0"></li>
+                    <li class="active step0"></li>
+                    <li class="step0"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-between top">
+            <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Processed</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Shipped</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/TkPm63y.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>En Route</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/HdsziHP.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Arrived</p>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
