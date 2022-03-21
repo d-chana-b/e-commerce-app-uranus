@@ -48,6 +48,7 @@ import com.myapp.uranuscapstone.service.UserService;
 public class UserController {
 
 	private final int DISCOUNT_DIVIDER = 100; // for cart items diveder
+	private final int DELIVERY_DATE = 7;
 
 	@Autowired
 	UserRepository userRepo;
@@ -310,7 +311,7 @@ public class UserController {
 	public String checkout(@RequestParam("totalAmount") Double totalAmount,@PathVariable String id, RedirectAttributes attributes) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Date orderDate = Date.valueOf(LocalDate.now());
-		// Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
+		Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
 		User user = userService.getAuthUser(auth);
 		// List<CartItems> cartItems = cartItemService.index(user, "IC");
 		// cartItems.forEach(it->it.setStatus("CO"));
@@ -318,7 +319,7 @@ public class UserController {
 		order.setUser(user);
 		order.setTotalAmount(totalAmount);
 		order.setOrderDate(orderDate);
-		// order.setDeliveryDate(deliveryDate);
+		order.setDeliveryDate(deliveryDate);
 		orderDetailRepo.save(order);
 		// cartItemService.saveAll(cartItems);
 
@@ -357,7 +358,7 @@ public class UserController {
 	public String checkout(@RequestParam("totalAmount") Double totalAmount, RedirectAttributes attributes) {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Date orderDate = Date.valueOf(LocalDate.now());
-		// Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
+		Date deliveryDate = Date.valueOf(LocalDate.now().plusDays(DELIVERY_DATE));
 		User user = userService.getAuthUser(auth);
 		// List<CartItems> cartItems = cartItemService.index(user, "IC");
 		// cartItems.forEach(it->it.setStatus("CO"));
@@ -365,7 +366,7 @@ public class UserController {
 		order.setUser(user);
 		order.setTotalAmount(totalAmount);
 		order.setOrderDate(orderDate);
-		// order.setDeliveryDate(deliveryDate);
+		order.setDeliveryDate(deliveryDate);
 		orderDetailRepo.save(order);
 		// cartItemService.saveAll(cartItems);
 
@@ -373,7 +374,7 @@ public class UserController {
 		attributes.addFlashAttribute("orderSuccess", "Order successfully placed"); // redirect attribute para sa mga e
 		return "redirect:/cart";
 	}
-	
+
 
 	// order details
 	@GetMapping("/order_details")
